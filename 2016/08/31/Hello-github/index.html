@@ -85,42 +85,18 @@
 
 
 <meta name="description" content="标题小标题latex: $O(n^2)$
-
-#include &amp;lt;set&amp;gt;
-#include &amp;lt;map&amp;gt;
-#include &amp;lt;cmath&amp;gt;
-#include &amp;lt;queue&amp;gt;
-#include &amp;lt;stack&amp;gt;
-#include &amp;lt;ctime&amp;gt;
-#include &amp;lt;cstdio&amp;gt;
-#include &amp;lt;bitset&amp;">
+#include &amp;lt;set&amp;gt;#include &amp;lt;map&amp;gt;#include &amp;lt;cmath&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;stack&amp;gt;#include &amp;lt;ctime&amp;gt;#include &amp;lt;cstdio&amp;gt;#include &amp;lt;bitset&amp;gt;#incl">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hello github">
 <meta property="og:url" content="http://shinfeb.github.io/2016/08/31/Hello-github/index.html">
 <meta property="og:site_name" content="ShinFeb's Archieve">
 <meta property="og:description" content="标题小标题latex: $O(n^2)$
-
-#include &amp;lt;set&amp;gt;
-#include &amp;lt;map&amp;gt;
-#include &amp;lt;cmath&amp;gt;
-#include &amp;lt;queue&amp;gt;
-#include &amp;lt;stack&amp;gt;
-#include &amp;lt;ctime&amp;gt;
-#include &amp;lt;cstdio&amp;gt;
-#include &amp;lt;bitset&amp;">
-<meta property="og:updated_time" content="2016-08-31T23:25:46.079Z">
+#include &amp;lt;set&amp;gt;#include &amp;lt;map&amp;gt;#include &amp;lt;cmath&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;stack&amp;gt;#include &amp;lt;ctime&amp;gt;#include &amp;lt;cstdio&amp;gt;#include &amp;lt;bitset&amp;gt;#incl">
+<meta property="og:updated_time" content="2016-09-01T00:22:42.030Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hello github">
 <meta name="twitter:description" content="标题小标题latex: $O(n^2)$
-
-#include &amp;lt;set&amp;gt;
-#include &amp;lt;map&amp;gt;
-#include &amp;lt;cmath&amp;gt;
-#include &amp;lt;queue&amp;gt;
-#include &amp;lt;stack&amp;gt;
-#include &amp;lt;ctime&amp;gt;
-#include &amp;lt;cstdio&amp;gt;
-#include &amp;lt;bitset&amp;">
+#include &amp;lt;set&amp;gt;#include &amp;lt;map&amp;gt;#include &amp;lt;cmath&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;stack&amp;gt;#include &amp;lt;ctime&amp;gt;#include &amp;lt;cstdio&amp;gt;#include &amp;lt;bitset&amp;gt;#incl">
 
 
 
@@ -201,7 +177,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -211,7 +187,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -274,7 +250,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <span class="post-meta-item-text">Posted on</span>
             <time itemprop="dateCreated" datetime="2016-08-31T22:30:44+08:00" content="2016-08-31">
               2016-08-31
             </time>
@@ -304,86 +280,7 @@
 
       
         <h1 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h1><h2 id="小标题"><a href="#小标题" class="headerlink" title="小标题"></a>小标题</h2><p>latex: $O(n^2)$</p>
-<p><div class="code-caption" data-lang="cpp" data-line_number="frontend" data-trim_indent="backend" data-label_position="outer" data-labels_left="Code" data-labels_right=":" data-labels_copy="Copy Code"><span class="code-caption-label"></span></div></p>
-<pre><code class="cpp">#include &lt;set&gt;
-#include &lt;map&gt;
-#include &lt;cmath&gt;
-#include &lt;queue&gt;
-#include &lt;stack&gt;
-#include &lt;ctime&gt;
-#include &lt;cstdio&gt;
-#include &lt;bitset&gt;
-#include &lt;cctype&gt;
-#include &lt;cstring&gt;
-#include &lt;cassert&gt;
-#include &lt;cstring&gt;
-#include &lt;iostream&gt;
-#include &lt;algorithm&gt;
-
-using namespace std;
-
-#define fi first
-#define se second
-#define rep(x,s,t) for(register int t_=t,x=s;x&lt;t_;x++)
-#define per(x,s,t) for(register int s_=s,x=(t)-1;x&gt;=s_;x--)
-#define travel(x) for(int I=last[x],to;I&amp;&amp;(to=e[I].to);I=e[I].nxt)
-#define prt(x) cout&lt;&lt;#x&lt;&lt;&quot;:&quot;&lt;&lt;x&lt;&lt;&quot; &quot;
-#define prtn(x) cout&lt;&lt;#x&lt;&lt;&quot;:&quot;&lt;&lt;x&lt;&lt;endl
-#define y1 asfkagn
-#define y2 fansfk
-#define rank gkalsfm
-#define hash gafgalsf
-#define inf (1&lt;&lt;30)
-#define INF (1ll&lt;&lt;61)
-#define showtime printf(&quot;%f&quot;,1.0*clock()/CLOCKS_PER_SEC)
-
-
-typedef long long ll;
-typedef double db;
-typedef pair&lt;int,int&gt; ii;
-
-const long double pi=acos(-1);
-
-template&lt;class T&gt;void sc(T &amp;x)
-{
-    int f=1;char c;x=0;
-    while(c=getchar(),c&lt;48)if(c==&#39;-&#39;)f=-1;
-    do x=x*10+(c^48);
-    while(c=getchar(),c&gt;47);
-    x*=f;
-}
-template&lt;class T&gt;void nt(T x)
-{
-    if(!x)return;
-    nt(x/10);
-    putchar(&#39;0&#39;+x%10);
-}
-template&lt;class T&gt;void pt(T x)
-{
-    if(x&lt;0)x=-x,putchar(&#39;-&#39;);
-    if(!x)putchar(&#39;0&#39;);
-    else nt(x);
-}
-template&lt;class T&gt;void pts(T x)
-{
-    pt(x);putchar(&#39; &#39;);
-}
-template&lt;class T&gt;void ptn(T x)
-{
-    pt(x);putchar(&#39;\n&#39;);
-}
-
-template&lt;class T&gt;inline void Max(T &amp;x,T y){if(x&lt;y)x=y;}
-template&lt;class T&gt;inline void Min(T &amp;x,T y){if(x&gt;y)x=y;}
-
-int main()
-{
-//    freopen(&quot;pro.in&quot;,&quot;r&quot;,stdin);
-//    freopen(&quot;chk.out&quot;,&quot;w&quot;,stdout);
-
-    return 0;
-}
-</code></pre>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bitset&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cctype&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">double</span> db;</div><div class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; ii;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">long</span> <span class="keyword">double</span> pi=<span class="built_in">acos</span>(<span class="number">-1</span>);</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">sc</span><span class="params">(T &amp;x)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> f=<span class="number">1</span>;<span class="keyword">char</span> c;x=<span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(c=getchar(),c&lt;<span class="number">48</span>)<span class="keyword">if</span>(c==<span class="string">'-'</span>)f=<span class="number">-1</span>;</div><div class="line">	<span class="keyword">do</span> x=x*<span class="number">10</span>+(c^<span class="number">48</span>);</div><div class="line">	<span class="keyword">while</span>(c=getchar(),c&gt;<span class="number">47</span>);</div><div class="line">	x*=f;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">nt</span><span class="params">(T x)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(!x)<span class="keyword">return</span>;</div><div class="line">	nt(x/<span class="number">10</span>);</div><div class="line">	<span class="built_in">putchar</span>(<span class="string">'0'</span>+x%<span class="number">10</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">pt</span><span class="params">(T x)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(x&lt;<span class="number">0</span>)x=-x,<span class="built_in">putchar</span>(<span class="string">'-'</span>);</div><div class="line">	<span class="keyword">if</span>(!x)<span class="built_in">putchar</span>(<span class="string">'0'</span>);</div><div class="line">	<span class="keyword">else</span> nt(x);</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">pts</span><span class="params">(T x)</span></span></div><div class="line">&#123;</div><div class="line">	pt(x);<span class="built_in">putchar</span>(<span class="string">' '</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">ptn</span><span class="params">(T x)</span></span></div><div class="line">&#123;</div><div class="line">	pt(x);<span class="built_in">putchar</span>(<span class="string">'\n'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Max</span><span class="params">(T &amp;x,T y)</span></span>&#123;<span class="keyword">if</span>(x&lt;y)x=y;&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Min</span><span class="params">(T &amp;x,T y)</span></span>&#123;<span class="keyword">if</span>(x&gt;y)x=y;&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line"><span class="comment">//	freopen("pro.in","r",stdin);</span></div><div class="line"><span class="comment">//	freopen("chk.out","w",stdout);</span></div><div class="line"></div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -464,10 +361,10 @@ int main()
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Inhaltsverzeichnis
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -484,7 +381,7 @@ int main()
           <div class="site-state-item site-state-posts">
             <a href="/archives">
               <span class="site-state-item-count">2</span>
-              <span class="site-state-item-name">Artikel</span>
+              <span class="site-state-item-name">posts</span>
             </a>
           </div>
 
@@ -542,7 +439,7 @@ int main()
 </div>
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
