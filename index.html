@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion">
+<html class="theme-next muse use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -96,7 +96,7 @@
 <script type="text/javascript" id="hexo.configuration">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
+    scheme: 'Muse',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
@@ -330,6 +330,223 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/01/2016-09-01-828510/" itemprop="url">
+                  一个看别人摆苹果的晚上
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-01T19:38:00+08:00" content="2016-09-01">
+              2016-09-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/贪心-TopCoder/" itemprop="url" rel="index">
+                    <span itemprop="name">贪心 TopCoder</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#SRM 659 DIV2 1000<br>在一条长度为n的序列上放一些1，使得每个长度为k的区间内1的个数不超过k/2；现在给定一个数组a[],表示a[i]上一定有一个1，问该序列上最多能有几个1。<br>n&lt;=1000000000,k&lt;=100000</p>
+<p>By Bgzc111<br><figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">class</span> ApplesAndOrangesHard&#123;  </div><div class="line"><span class="keyword">public</span>:  </div><div class="line">    <span class="keyword">int</span> a[<span class="number">100005</span>];  </div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maximumApples</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> k,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; info)</span></span>&#123;  </div><div class="line">        <span class="keyword">int</span> i,j;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;info.size();++i)info[i]--;<span class="comment">//从0开始</span></div><div class="line">        <span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span>(a));</div><div class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;(k/<span class="number">2</span>);i++)&#123;</div><div class="line">            a[i]=<span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> ans=n/k*(k/<span class="number">2</span>);</div><div class="line">		sort(info.begin(),info.end());<span class="comment">//注意要将限制排序</span></div><div class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;info.size();i++)&#123;</div><div class="line">            <span class="keyword">int</span> id=info[i]/k+<span class="number">2</span>,pos=info[i]%k;</div><div class="line">            <span class="keyword">if</span>(!a[pos])&#123;</div><div class="line">                <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;k;j++)&#123;</div><div class="line">                    <span class="keyword">int</span> x=(pos-j<span class="number">-1</span>+k)%k;</div><div class="line">                    <span class="keyword">if</span>(!a[x]) <span class="keyword">continue</span>;</div><div class="line">                    <span class="keyword">if</span>(x&lt;pos&amp;&amp;a[x]==id)<span class="keyword">continue</span>;<span class="comment">//x&lt;pos且当前1与更新位置在同一个区间内-&gt;(1);</span></div><div class="line">                    <span class="keyword">if</span>(x&gt;pos&amp;&amp;a[x]&gt;=id<span class="number">-1</span>)<span class="keyword">continue</span>;<span class="comment">//x&gt;pos且当前1在上一个区间内-&gt;(2);— </span></div><div class="line">                    <span class="keyword">if</span>(x&gt;pos)ans--;<span class="comment">//x&gt;pos更新答案</span></div><div class="line">                    a[x]=<span class="number">0</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            a[pos]=id;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n%k;i++)&#123;</div><div class="line">            <span class="keyword">if</span>(a[i]) ans++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> ans;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>一开始根据对k取模的余数分组。<br>a[i]=j表示余数为i的组在第j段强制放了1。<br>a[i]&gt;0表示以后余数为i的组放1，a[i]=0表示不放1。</p>
+<p>j=1是虚拟出来的一段，巧妙的不会和以后的冲突。</p>
+<p>然后算出了没有限制的情况下n/k段里ans的最大值。<br>每次更改都是永久性的，如果不调整就会一直持续下去。</p>
+<p>不调整得到的结果足够优吗？<br>为什么要从前面拿1？</p>
+<p>关于从前面拿1：<br>因为这种思路是建立在：当前的尽可能往前靠，后面的再将就将就。</p>
+<p>调整之后又会进入一个周期，这个周期已经是在将就之前的周期的情况下尽可能向前靠的周期，所以在尾巴那里就已经是尽可能优的结果了。</p>
+<p>所以问题推到了他是如何尽可能往前靠的==+<br>因为他是倒着for的。（注意j枚举的是距离，之前看错，还奇怪为什么是正着for的）</p>
+<p>为什么ans–？<br>因为开始的时候默认每段都是k/2个1，但如果从前一段取了1，那么前一段少了一个1，从而ans–。</p>
+<p>一道有趣的贪心题。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/31/Dinic-Flow/" itemprop="url">
+                  Template Dinic Flow
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-08-31T22:30:44+08:00" content="2016-08-31">
+              2016-08-31
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Dinic网络流的模板</p>
+<figure class="highlight"><table><tr><td class="code"><pre><div class="line">#include &lt;set&gt;</div><div class="line">#include &lt;ctime&gt;</div><div class="line">#include &lt;queue&gt;</div><div class="line">#include &lt;cstdio&gt;</div><div class="line">#include &lt;bitset&gt;</div><div class="line">#include &lt;cctype&gt;</div><div class="line">#include &lt;bitset&gt;</div><div class="line">#include &lt;cstdlib&gt;</div><div class="line">#include &lt;cassert&gt;</div><div class="line">#include &lt;cstring&gt;</div><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;algorithm&gt;</div><div class="line">#define inf (1&lt;&lt;30)</div><div class="line">#define INF (1ll&lt;&lt;62)</div><div class="line">#define fi first</div><div class="line">#define se second</div><div class="line">#define rep(x,s,t) for(register int x=s,t_=t;x&lt;t_;++x)</div><div class="line">#define per(x,s,t) for(register int x=t-1,s_=s;x&gt;=s_;--x)</div><div class="line">#define travel(x) for(int I=last[x],to;I&amp;&amp;(to=e[I].to);I=e[I].nxt)</div><div class="line">#define prt(x) cout&lt;&lt;#x&lt;&lt;":"&lt;&lt;x&lt;&lt;" "</div><div class="line">#define prtn(x) cout&lt;&lt;#x&lt;&lt;":"&lt;&lt;x&lt;&lt;endl</div><div class="line">#define pb(x) push_back(x)</div><div class="line">#define hash asfmaljkg</div><div class="line">#define rank asfjhgskjf</div><div class="line">#define y1 asggnja</div><div class="line">#define y2 slfvm</div><div class="line">using namespace std;</div><div class="line">typedef long long ll;</div><div class="line">typedef pair&lt;int,int&gt; ii;</div><div class="line">template&lt;class T&gt;void sc(T &amp;x)&#123;</div><div class="line">    int f=1;char c;x=0;</div><div class="line">    while(c=getchar(),c&lt;48)if(c=='-')f=-1;</div><div class="line">    do x=x*10+(c^48);</div><div class="line">    while(c=getchar(),c&gt;47);</div><div class="line">    x*=f;</div><div class="line">&#125;</div><div class="line">template&lt;class T&gt;void nt(T x)&#123;</div><div class="line">    if(!x)return;</div><div class="line">    nt(x/10);</div><div class="line">    putchar(x%10+'0');</div><div class="line">&#125;</div><div class="line">template&lt;class T&gt;void pt(T x)&#123;</div><div class="line">    if(x&lt;0)putchar('-'),x=-x;</div><div class="line">    if(!x)putchar('0');</div><div class="line">    else nt(x);</div><div class="line">&#125;</div><div class="line">template&lt;class T&gt;void ptn(T x)&#123;</div><div class="line">    pt(x);putchar('\n');</div><div class="line">&#125;</div><div class="line">template&lt;class T&gt;void pts(T x)&#123;</div><div class="line">    pt(x);putchar(' ');</div><div class="line">&#125;</div><div class="line">template&lt;class T&gt;inline void Max(T &amp;x,T y)&#123;if(x&lt;y)x=y;&#125;</div><div class="line">template&lt;class T&gt;inline void Min(T &amp;x,T y)&#123;if(x&gt;y)x=y;&#125;</div><div class="line"></div><div class="line">struct DinicFlow&#123;</div><div class="line">    static const int maxv=11000;//include in' and out' </div><div class="line">    static const int maxe=41000;//include reverse'</div><div class="line">    int nn;//size of vertices</div><div class="line">    int S,T;//source,dest</div><div class="line">    </div><div class="line">    int work[maxv];</div><div class="line">    int head[maxv],lcnt;</div><div class="line">    struct Lane&#123;</div><div class="line">        Lane(int a=0,int b=0,int c=0):</div><div class="line">            to(a),nxt(b),flow(c)&#123;&#125;</div><div class="line">        int to,nxt,flow;</div><div class="line">    &#125;lane[maxe];</div><div class="line"></div><div class="line">    void init(int st,int en,int tot)&#123;</div><div class="line">        S=st;T=en;nn=tot;</div><div class="line">        memset(head,-1,nn+1&lt;&lt;2);</div><div class="line">        lcnt=0;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    int newnode()&#123;</div><div class="line">        head[++nn]=-1;</div><div class="line">        return nn;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    inline void ins(int u,int v,int f)&#123;</div><div class="line">        lane[lcnt]=Lane(v,head[u],f);head[u]=lcnt++;</div><div class="line">        lane[lcnt]=Lane(u,head[v],0);head[v]=lcnt++;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    int que[maxv*100];//STL?</div><div class="line">    int dist[maxv];</div><div class="line">    bool bfs()&#123;</div><div class="line">        int l,r;l=r=0;</div><div class="line">        que[r++]=S;</div><div class="line">        rep(i,0,nn+1)dist[i]=-1;</div><div class="line">        dist[S]=0;</div><div class="line">        while(l&lt;r)&#123;</div><div class="line">            int pre=que[l++];</div><div class="line">            for(register int i=head[pre];~i;i=lane[i].nxt)&#123;</div><div class="line">                int to=lane[i].to;</div><div class="line">                if(lane[i].flow&gt;0&amp;&amp;dist[to]==-1)&#123;</div><div class="line">                    dist[to]=dist[pre]+1;</div><div class="line">                    que[r++]=to;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return dist[T]!=-1;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    bool vis[maxv];</div><div class="line">    int dfs(int x,int flow)&#123;</div><div class="line">    	vis[x]=true;</div><div class="line">    	if(x==T)return flow;</div><div class="line">    	for(int y,tmp,&amp;i=work[x];~i;i=lane[i].nxt)&#123;</div><div class="line">    		y=lane[i].to;</div><div class="line">    		if(lane[i].flow&gt;0&amp;&amp;dist[y]==dist[x]+1&amp;&amp;!vis[y])&#123;</div><div class="line">    			if(tmp=dfs(y,min(lane[i].flow,flow)),tmp&gt;0)&#123;</div><div class="line">    				lane[i].flow-=tmp;</div><div class="line">    				lane[i^1].flow+=tmp;</div><div class="line">    				return tmp;</div><div class="line">    			&#125;</div><div class="line">    		&#125;</div><div class="line">    	&#125;</div><div class="line">    	return 0;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    int flowpoly()&#123;//ll?</div><div class="line">        int ans=0;</div><div class="line">        while(bfs())&#123;</div><div class="line">        	rep(i,0,nn+1)work[i]=head[i];</div><div class="line">        	for(;;)&#123;</div><div class="line">				rep(i,0,nn+1)vis[i]=false;</div><div class="line">				int flow=dfs(S,inf);</div><div class="line">				if(!flow)break;</div><div class="line">				ans+=flow;</div><div class="line">			&#125;</div><div class="line">        &#125;</div><div class="line">        return ans;</div><div class="line">    &#125;</div><div class="line">&#125;df;</div><div class="line"></div><div class="line">int n,m,K;</div><div class="line">int main()&#123;</div><div class="line">//  freopen("pro.in","r",stdin);</div><div class="line">//  freopen("chk.out","w",stdout);</div><div class="line">//	int cas;sc(cas);</div><div class="line">//	while(cas--)solve();</div><div class="line">	sc(n);sc(m);sc(K);</div><div class="line">	</div><div class="line"> 	#define idx(x,y) (x*(m+1)+y+1)</div><div class="line">	int S=idx(n,0),T=idx(n,1);</div><div class="line">	int tot=T;</div><div class="line">	df.init(S,T,tot);</div><div class="line"> 	</div><div class="line"> 	rep(i,0,n)&#123;</div><div class="line"> 		df.ins(S,idx(i,0),inf);</div><div class="line"> 		df.ins(idx(i,m),T,inf);</div><div class="line">		rep(j,0,m)&#123;</div><div class="line">			int a;sc(a);</div><div class="line"> 			df.ins(idx(i,j),idx(i,j+1),a==-1?inf:100-a);</div><div class="line"> 		&#125;</div><div class="line"> 	&#125;</div><div class="line"> 	rep(i,0,K)&#123;</div><div class="line"> 		int a,b;</div><div class="line"> 		sc(a);sc(b);</div><div class="line"> 		--a;--b;</div><div class="line"> 		rep(j,0,m)df.ins(idx(a,j),idx(b,j+1),inf);</div><div class="line">	&#125;</div><div class="line">	printf("%.2f\n",1.0*(100*n-df.flowpoly())/n);</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/31/Hello-github/" itemprop="url">
                   Hello GitHub!
                 </a>
@@ -378,6 +595,104 @@
 <p>$$<br>k^{k^{k^{k^{k^{k^{k^{k^{k^{k^{k^{k}}}}}}}}}}}<br>$$</p>
 <figure class="highlight"><table><tr><td class="code"><pre><div class="line">#include &lt;set&gt;</div><div class="line">#include &lt;map&gt;</div><div class="line">#include &lt;cmath&gt;</div><div class="line">#include &lt;queue&gt;</div><div class="line">#include &lt;stack&gt;</div><div class="line">#include &lt;ctime&gt;</div><div class="line">#include &lt;cstdio&gt;</div><div class="line">#include &lt;bitset&gt;</div><div class="line">#include &lt;cctype&gt;</div><div class="line">#include &lt;cstring&gt;</div><div class="line">#include &lt;cassert&gt;</div><div class="line">#include &lt;cstring&gt;</div><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;algorithm&gt;</div><div class="line"></div><div class="line">using namespace std;</div><div class="line"></div><div class="line">#define fi first</div><div class="line">#define se second</div><div class="line">#define rep(x,s,t) for(register int t_=t,x=s;x&lt;t_;x++)</div><div class="line">#define per(x,s,t) for(register int s_=s,x=(t)-1;x&gt;=s_;x--)</div><div class="line">#define travel(x) for(int I=last[x],to;I&amp;&amp;(to=e[I].to);I=e[I].nxt)</div><div class="line">#define prt(x) cout&lt;&lt;#x&lt;&lt;":"&lt;&lt;x&lt;&lt;" "</div><div class="line">#define prtn(x) cout&lt;&lt;#x&lt;&lt;":"&lt;&lt;x&lt;&lt;endl</div><div class="line">#define y1 asfkagn</div><div class="line">#define y2 fansfk</div><div class="line">#define rank gkalsfm</div><div class="line">#define hash gafgalsf</div><div class="line">#define inf (1&lt;&lt;30)</div><div class="line">#define INF (1ll&lt;&lt;61)</div><div class="line">#define showtime printf("%f",1.0*clock()/CLOCKS_PER_SEC)</div></pre></td></tr></table></figure>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">double</span> db;</div><div class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; ii;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">long</span> <span class="keyword">double</span> pi=<span class="built_in">acos</span>(<span class="number">-1</span>);</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">sc</span><span class="params">(T &amp;x)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> f=<span class="number">1</span>;<span class="keyword">char</span> c;x=<span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(c=getchar(),c&lt;<span class="number">48</span>)<span class="keyword">if</span>(c==<span class="string">'-'</span>)f=<span class="number">-1</span>;</div><div class="line">	<span class="keyword">do</span> x=x*<span class="number">10</span>+(c^<span class="number">48</span>);</div><div class="line">	<span class="keyword">while</span>(c=getchar(),c&gt;<span class="number">47</span>);</div><div class="line">	x*=f;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">nt</span><span class="params">(T x)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(!x)<span class="keyword">return</span>;</div><div class="line">	nt(x/<span class="number">10</span>);</div><div class="line">	<span class="built_in">putchar</span>(<span class="string">'0'</span>+x%<span class="number">10</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">pt</span><span class="params">(T x)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(x&lt;<span class="number">0</span>)x=-x,<span class="built_in">putchar</span>(<span class="string">'-'</span>);</div><div class="line">	<span class="keyword">if</span>(!x)<span class="built_in">putchar</span>(<span class="string">'0'</span>);</div><div class="line">	<span class="keyword">else</span> nt(x);</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">pts</span><span class="params">(T x)</span></span></div><div class="line">&#123;</div><div class="line">	pt(x);<span class="built_in">putchar</span>(<span class="string">' '</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">ptn</span><span class="params">(T x)</span></span></div><div class="line">&#123;</div><div class="line">	pt(x);<span class="built_in">putchar</span>(<span class="string">'\n'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Max</span><span class="params">(T &amp;x,T y)</span></span>&#123;<span class="keyword">if</span>(x&lt;y)x=y;&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Min</span><span class="params">(T &amp;x,T y)</span></span>&#123;<span class="keyword">if</span>(x&gt;y)x=y;&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line"><span class="comment">//	freopen("pro.in","r",stdin);</span></div><div class="line"><span class="comment">//	freopen("chk.out","w",stdout);</span></div><div class="line"></div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/31/一个看别人放蜘蛛的晚上/" itemprop="url">
+                  一个看别人放蜘蛛的晚上
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-08-31T22:30:44+08:00" content="2016-08-31">
+              2016-08-31
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#Codeforces 526G Spiders Evil Plan<br>给定一个棵无根树，树上有n个节点，每条边都有一个长度li。现有q个询问,每个询问给出两个数x，y，表示我们选择y条路径，组成一个包含点x的连通块，求连通块的最大长度和。<br>n,q&lt;=100000,li&lt;=1000.</p>
+<p>By <a href="http://codeforces.com/contest/526/submission/10603637" target="_blank" rel="external">DemiGuo</a><br>（原代码下面附了题解）</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100005</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxd = <span class="number">19</span>;</div><div class="line"><span class="keyword">int</span> root = <span class="number">0</span>, n, m, top = <span class="number">0</span>;</div><div class="line"><span class="keyword">int</span> tot = <span class="number">0</span>, V[maxn &lt;&lt; <span class="number">1</span>], N[maxn &lt;&lt; <span class="number">1</span>], C[maxn &lt;&lt; <span class="number">1</span>], F[maxn];</div><div class="line"><span class="keyword">int</span> dp[maxn][<span class="number">2</span>], fa[maxn][maxd], son[maxn], down[maxn], up[maxn], tofa[maxn], sum[maxn], num[maxn];</div><div class="line">pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; len[maxn];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span>  </span>&#123;</div><div class="line">    ++ tot, V[tot] = b, C[tot] = c, N[tot] = F[a], F[a] = tot;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> v)</span>  </span>&#123;</div><div class="line">    <span class="keyword">if</span> (v &gt; dp[x][<span class="number">0</span>])  dp[x][<span class="number">1</span>] = dp[x][<span class="number">0</span>], dp[x][<span class="number">0</span>] = v;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (v &gt; dp[x][<span class="number">1</span>])  dp[x][<span class="number">1</span>] = v;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dp1</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> f)</span>  </span>&#123;</div><div class="line">    dp[x][<span class="number">0</span>] = dp[x][<span class="number">1</span>] = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> p = F[x]; p &gt; <span class="number">0</span>; p = N[p])</div><div class="line">        <span class="keyword">if</span> (V[p] != f)  &#123;</div><div class="line">            dp1(V[p], x);</div><div class="line">            update(x, dp[V[p]][<span class="number">0</span>] + C[p]);</div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dp2</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> f, <span class="keyword">int</span> tf)</span>  </span>&#123;</div><div class="line">    <span class="keyword">if</span> (f != <span class="number">0</span>)  &#123;</div><div class="line">        <span class="keyword">if</span> (dp[x][<span class="number">0</span>] + tf == dp[f][<span class="number">0</span>])  update(x, tf + dp[f][<span class="number">1</span>]);</div><div class="line">        <span class="keyword">else</span> update(x, tf + dp[f][<span class="number">0</span>]);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> p = F[x]; p &gt; <span class="number">0</span>; p = N[p])</div><div class="line">        <span class="keyword">if</span> (V[p] != f)  dp2(V[p], x, C[p]);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> f)</span>  </span>&#123;</div><div class="line">    fa[x][<span class="number">0</span>] = f;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> d = <span class="number">1</span>; d &lt; maxd; d ++)</div><div class="line">        fa[x][d] = fa[ fa[x][d - <span class="number">1</span>] ][d - <span class="number">1</span>];</div><div class="line">    down[x] = son[x] = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> p = F[x]; p &gt; <span class="number">0</span>; p = N[p])</div><div class="line">        <span class="keyword">if</span> (V[p] != f) &#123;</div><div class="line">            up[V[p]] = up[x] + C[p];</div><div class="line">            tofa[V[p]] = C[p];</div><div class="line">            dfs(V[p], x);</div><div class="line">            <span class="keyword">if</span> (C[p] + down[V[p]] &gt; down[x])  &#123;</div><div class="line">                down[x] = down[V[p]] + C[p];</div><div class="line">                son[x] = V[p];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">precalc</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> f, <span class="keyword">int</span> ext)</span>  </span>&#123;</div><div class="line">    <span class="keyword">if</span> (son[x] == <span class="number">0</span>)  &#123;</div><div class="line">        len[++ top] = make_pair(-ext, x);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    precalc(son[x], x, ext + tofa[son[x]]);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> p = F[x]; p &gt; <span class="number">0</span>; p = N[p])  </div><div class="line">        <span class="keyword">if</span> (V[p] != f &amp;&amp; V[p] != son[x])  &#123;</div><div class="line">            precalc(V[p], x, C[p]);</div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>  </span>&#123;</div><div class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i ++)  &#123;</div><div class="line">        <span class="keyword">int</span> a, b, c;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;a, &amp;b, &amp;c);</div><div class="line">        add(a, b, c), add(b, a, c);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//find root</span></div><div class="line">    dp1(<span class="number">1</span>, <span class="number">0</span>);</div><div class="line">    dp2(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>); <span class="comment">//furthest[x] = dp[x][0]</span></div><div class="line">    root = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)</div><div class="line">        <span class="keyword">if</span> (root == <span class="number">0</span> || dp[i][<span class="number">0</span>] &lt; dp[root][<span class="number">0</span>])  root = i;</div><div class="line"></div><div class="line">    <span class="comment">//precalc</span></div><div class="line">    up[<span class="number">0</span>] = <span class="number">0</span>;</div><div class="line">    tofa[root] = up[root] = <span class="number">0</span>;</div><div class="line">    dfs(root, <span class="number">0</span>);</div><div class="line">    top = <span class="number">0</span>;</div><div class="line">    precalc(root, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">    sort(len + <span class="number">1</span>, len + <span class="number">1</span> + top); <span class="comment">//(-len, leaf #)</span></div><div class="line">    <span class="built_in">memset</span>(num, <span class="number">0</span>, <span class="keyword">sizeof</span> num);</div><div class="line">    sum[<span class="number">0</span>] = <span class="number">0</span>, num[root] = <span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= top; i ++)  &#123;</div><div class="line">        sum[i] = sum[i - <span class="number">1</span>] - len[i].first;</div><div class="line">        <span class="keyword">int</span> x = len[i].second;</div><div class="line">        <span class="keyword">while</span> (num[x] == <span class="number">0</span>)  &#123;</div><div class="line">            num[x] = i;</div><div class="line">            x = fa[x][<span class="number">0</span>];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//solve</span></div><div class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</div><div class="line">    dp1(root, <span class="number">0</span>);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i ++)  &#123;</div><div class="line">        <span class="keyword">int</span> x, y;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x, &amp;y);</div><div class="line">        x = (x + ans - <span class="number">1</span>) % n + <span class="number">1</span>;</div><div class="line">        y = (y + ans - <span class="number">1</span>) % n + <span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span> (num[x] &lt;= <span class="number">2</span> * y)  &#123;</div><div class="line">            ans = sum[min(<span class="number">2</span> * y, top)];</div><div class="line">        &#125;<span class="keyword">else</span>  &#123; <span class="comment">//substitution</span></div><div class="line">            <span class="keyword">int</span> anc = x;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> d = maxd - <span class="number">1</span>; d &gt;= <span class="number">0</span>; d --)</div><div class="line">                <span class="keyword">if</span> (fa[anc][d] != <span class="number">0</span> &amp;&amp; num[fa[anc][d]] &gt; <span class="number">2</span> * y)  anc = fa[anc][d];</div><div class="line">            anc = fa[anc][<span class="number">0</span>];</div><div class="line">            ans = sum[min(<span class="number">2</span> * y, top)] + dp[x][<span class="number">0</span>] + up[x] - up[anc];</div><div class="line">            ans -= min(-len[<span class="number">2</span> * y].first, dp[anc][<span class="number">0</span>]); </div><div class="line">        &#125;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>“ans -= min(-len[2 * y].first, dp[anc][0]); ”<br>启示：一个限制条件可能改变原有的优劣关系</p>
+<p>把一道看起来很吓人的题写成了一道有树链剖分味道的贪心题。</p>
+
           
         
       
@@ -507,6 +822,309 @@
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/26/一棵封装起来的虚树/" itemprop="url">
+                  一棵封装起来的虚树
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-08-26T14:13:00+08:00" content="2016-08-26">
+              2016-08-26
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>原来写虚树都是用hzwer学长的写法，非常精妙也很高效，直到最近看到了Stilwell的做法。<br>其实变化也不大，就是先按dfs序排一遍，把需要的lca都塞到后面，最后再来一次排序把lca插进对应的位置。<br>用常数换精力感觉赚了一个亿。<br><figure class="highlight"><table><tr><td class="code"><pre><div class="line">#include &lt;set&gt;</div><div class="line">#include &lt;ctime&gt;</div><div class="line">#include &lt;queue&gt;</div><div class="line">#include &lt;cstdio&gt;</div><div class="line">#include &lt;bitset&gt;</div><div class="line">#include &lt;cctype&gt;</div><div class="line">#include &lt;bitset&gt;</div><div class="line">#include &lt;cstdlib&gt;</div><div class="line">#include &lt;cassert&gt;</div><div class="line">#include &lt;cstring&gt;</div><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;algorithm&gt;</div><div class="line">#define inf (1&lt;&lt;30)</div><div class="line">#define INF (1ll&lt;&lt;62)</div><div class="line">#define fi first</div><div class="line">#define se second</div><div class="line">#define rep(x,s,t) for(register int x=s,t_=t;x&lt;t_;++x)</div><div class="line">#define per(x,s,t) for(register int x=t-1,s_=s;x&gt;=s_;--x)</div><div class="line">#define travel(x) for(int I=last[x],to;~I&amp;&amp;(to=e[I].to);I=e[I].nxt)</div><div class="line">#define prt(x) cout&lt;&lt;#x&lt;&lt;":"&lt;&lt;x&lt;&lt;" "</div><div class="line">#define prtn(x) cout&lt;&lt;#x&lt;&lt;":"&lt;&lt;x&lt;&lt;endl</div><div class="line">#define pb(x) push_back(x)</div><div class="line">#define hash asfmaljkg</div><div class="line">#define rank asfjhgskjf</div><div class="line">#define y1 asggnja</div><div class="line">#define y2 slfvm</div><div class="line">using namespace std;</div><div class="line">typedef long long ll;</div><div class="line">typedef pair&lt;int,int&gt; ii;</div><div class="line">template&lt;class T&gt;void sc(T &amp;x)</div><div class="line">&#123;</div><div class="line">    int f=1;char c;x=0;</div><div class="line">    while(c=getchar(),c&lt;48)if(c=='-')f=-1;</div><div class="line">    do x=x*10+(c^48);</div><div class="line">    while(c=getchar(),c&gt;47);</div><div class="line">    x*=f;</div><div class="line">&#125;</div><div class="line">template&lt;class T&gt;void nt(T x)</div><div class="line">&#123;</div><div class="line">    if(!x)return;</div><div class="line">    nt(x/10);</div><div class="line">    putchar(x%10+'0');</div><div class="line">&#125;</div><div class="line">template&lt;class T&gt;void pt(T x)</div><div class="line">&#123;</div><div class="line">    if(x&lt;0)putchar('-'),x=-x;</div><div class="line">    if(!x)putchar('0');</div><div class="line">    else nt(x);</div><div class="line">&#125;</div><div class="line">template&lt;class T&gt;void ptn(T x)</div><div class="line">&#123;</div><div class="line">    pt(x);putchar('\n');</div><div class="line">&#125;</div><div class="line">template&lt;class T&gt;void pts(T x)</div><div class="line">&#123;</div><div class="line">    pt(x);putchar(' ');</div><div class="line">&#125;</div><div class="line">template&lt;class T&gt;inline void Max(T &amp;x,T y)&#123;if(x&lt;y)x=y;&#125;</div><div class="line">template&lt;class T&gt;inline void Min(T &amp;x,T y)&#123;if(x&gt;y)x=y;&#125;</div><div class="line"></div><div class="line">const int maxn=250005;</div><div class="line">const int maxb=20;</div><div class="line"></div><div class="line">int n,m;</div><div class="line"></div><div class="line">namespace Tree</div><div class="line">&#123;</div><div class="line">    int rt;</div><div class="line">    int lx[maxn],rx[maxn],dfs_clock;</div><div class="line">    int dep[maxn];</div><div class="line">    </div><div class="line">    int fa[maxb][maxn];</div><div class="line">    </div><div class="line">    bool vis[maxn];</div><div class="line">    </div><div class="line">    int last[maxn],ecnt;</div><div class="line">    struct Edge</div><div class="line">    &#123;</div><div class="line">        int to,nxt,cost;</div><div class="line">    &#125;e[maxn&lt;&lt;1];</div><div class="line">    void ins(int u,int v,int w)</div><div class="line">    &#123;</div><div class="line">        e[ecnt]=(Edge)&#123;v,last[u],w&#125;;</div><div class="line">        last[u]=ecnt++;</div><div class="line">    &#125;</div><div class="line">    void inses(int u,int v,int w)</div><div class="line">    &#123;</div><div class="line">        ins(u,v,w);</div><div class="line">        ins(v,u,w);</div><div class="line">    &#125;</div><div class="line">    void Init()</div><div class="line">    &#123;</div><div class="line">        rep(i,0,n+1)last[i]=-1;</div><div class="line">        ecnt=0;</div><div class="line">    &#125;</div><div class="line">    void predfs(int x)</div><div class="line">    &#123;</div><div class="line">        vis[x]=true;</div><div class="line">        lx[x]=++dfs_clock;</div><div class="line">        travel(x)if(!vis[to])</div><div class="line">        &#123;</div><div class="line">            dep[to]=dep[x]+1;</div><div class="line">                    </div><div class="line">            fa[0][to]=x;</div><div class="line">            </div><div class="line">            for(int i=0;fa[i][to];i++)</div><div class="line">                fa[i+1][to]=fa[i][fa[i][to]];</div><div class="line">        </div><div class="line">            predfs(to);</div><div class="line">        &#125;</div><div class="line">        rx[x]=dfs_clock;</div><div class="line">        vis[x]=false;</div><div class="line">    &#125;</div><div class="line">    void GetID()</div><div class="line">    &#123;</div><div class="line">        dep[rt]=1;</div><div class="line">        fa[0][rt]=0;</div><div class="line">        dfs_clock=0;</div><div class="line">        </div><div class="line">        predfs(rt);</div><div class="line">    &#125;</div><div class="line">    int LCA(int u,int v)</div><div class="line">    &#123;</div><div class="line">        if(dep[u]&lt;dep[v])swap(u,v);</div><div class="line">        int t=dep[u]-dep[v];</div><div class="line">        rep(i,0,maxb)</div><div class="line">            if(t&amp;1&lt;&lt;i)</div><div class="line">                u=fa[i][u];</div><div class="line">        if(u==v)return u;</div><div class="line">        per(i,0,maxb)</div><div class="line">            if(fa[i][u]!=fa[i][v])</div><div class="line">            &#123;</div><div class="line">                u=fa[i][u];</div><div class="line">                v=fa[i][v];</div><div class="line">            &#125;</div><div class="line">        return fa[0][u];</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">namespace VTree</div><div class="line">&#123;</div><div class="line">    int tot;</div><div class="line">    </div><div class="line">    int a[maxn];</div><div class="line">    int stk[maxn];</div><div class="line">    int app[maxn],aid;</div><div class="line">    </div><div class="line">    bool vis[maxn];</div><div class="line">    </div><div class="line">    int last[maxn],ecnt;</div><div class="line">    struct Edge</div><div class="line">    &#123;</div><div class="line">        int to,nxt;</div><div class="line">    &#125;e[maxn&lt;&lt;1];</div><div class="line">    void ins(int u,int v)</div><div class="line">    &#123;</div><div class="line">        e[ecnt]=(Edge)&#123;v,last[u]&#125;;</div><div class="line">        last[u]=ecnt++;</div><div class="line">    &#125;</div><div class="line">    void inses(int u,int v)</div><div class="line">    &#123;</div><div class="line">        ins(u,v);</div><div class="line">        ins(v,u);</div><div class="line">    &#125;</div><div class="line">    void Clear()</div><div class="line">    &#123;</div><div class="line">        tot=0;</div><div class="line">        ecnt=0;</div><div class="line">        ++aid;</div><div class="line">    &#125;</div><div class="line">    void Push(int x)</div><div class="line">    &#123;</div><div class="line">        if(app[x]==aid)return;</div><div class="line">        a[tot++]=x;</div><div class="line">        app[x]=aid;</div><div class="line">        last[x]=-1;</div><div class="line">    &#125;</div><div class="line">    bool cmp(int x,int y)</div><div class="line">    &#123;</div><div class="line">        return Tree::lx[x]&lt;Tree::lx[y];</div><div class="line">    &#125;</div><div class="line">    void Build()</div><div class="line">    &#123;</div><div class="line">        sort(a,a+tot,cmp);</div><div class="line">        rep(i,0,tot-1)</div><div class="line">        &#123;</div><div class="line">            int l=Tree::LCA(a[i],a[i+1]);</div><div class="line">            if(app[l]!=aid)</div><div class="line">                Push(l);</div><div class="line">        &#125;</div><div class="line">        if(app[Tree::rt]!=aid)</div><div class="line">            Push(Tree::rt);</div><div class="line">        </div><div class="line">        sort(a,a+tot,cmp);</div><div class="line">        int top=0;</div><div class="line">        stk[++top]=a[0];</div><div class="line">        rep(i,1,tot)</div><div class="line">        &#123;</div><div class="line">            int u=a[i],v;</div><div class="line">            for(;;top--)</div><div class="line">            &#123;</div><div class="line">                v=stk[top];</div><div class="line">                if(Tree::lx[v]&lt;=Tree::lx[u]&amp;&amp;Tree::rx[u]&lt;=Tree::rx[v])break;</div><div class="line">            &#125;</div><div class="line">            inses(u,v);</div><div class="line">            stk[++top]=u;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">//  freopen("pro.in","r",stdin);</div><div class="line">//  freopen("chk.out","w",stdout);</div><div class="line">//  int cas;sc(cas);</div><div class="line">//  while(cas--)solve();</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/26/2016-08-26-a-skip-heavy-chain-ask-lca-tree/" itemprop="url">
+                  一棵跳重链求lca的树
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-08-26T09:35:00+08:00" content="2016-08-26">
+              2016-08-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/树链剖分-模板/" itemprop="url" rel="index">
+                    <span itemprop="name">树链剖分 模板</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>适用范围：（很快地）求lca、配合树剖</p>
+<p>把一个节点提一定高度：先跳重链，不能跳的时候因为链上是连号的，记一下dfs序对应的节点即可<br>想查询u的哪个儿子包含提一下点就好了，但是懒，以前总是暴力扫儿子</p>
+<p>查询路径上的最小值(zkw线段树?)之类好麻烦的QAQ<br>倍增求lca并维护信息比较无脑，用内存和时间换精力还是很值的<br><figure class="highlight"><table><tr><td class="code"><pre><div class="line">#include &lt;set&gt;</div><div class="line">#include &lt;ctime&gt;</div><div class="line">#include &lt;queue&gt;</div><div class="line">#include &lt;cstdio&gt;</div><div class="line">#include &lt;bitset&gt;</div><div class="line">#include &lt;cctype&gt;</div><div class="line">#include &lt;bitset&gt;</div><div class="line">#include &lt;cstdlib&gt;</div><div class="line">#include &lt;cassert&gt;</div><div class="line">#include &lt;cstring&gt;</div><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;algorithm&gt;</div><div class="line">#define inf (1&lt;&lt;30)</div><div class="line">#define INF (1ll&lt;&lt;62)</div><div class="line">#define fi first</div><div class="line">#define se second</div><div class="line">#define rep(x,s,t) for(register int x=s,t_=t;x&lt;t_;++x)</div><div class="line">#define per(x,s,t) for(register int x=t-1,s_=s;x&gt;=s_;--x)</div><div class="line">#define travel(x) for(int I=last[x],to;~I&amp;&amp;(to=e[I].to);I=e[I].nxt)</div><div class="line">#define prt(x) cout&lt;&lt;#x&lt;&lt;":"&lt;&lt;x&lt;&lt;" "</div><div class="line">#define prtn(x) cout&lt;&lt;#x&lt;&lt;":"&lt;&lt;x&lt;&lt;endl</div><div class="line">#define pb(x) push_back(x)</div><div class="line">#define hash asfmaljkg</div><div class="line">#define rank asfjhgskjf</div><div class="line">#define y1 asggnja</div><div class="line">#define y2 slfvm</div><div class="line">using namespace std;</div><div class="line">typedef long long ll;</div><div class="line">typedef pair&lt;int,int&gt; ii;</div><div class="line">template&lt;class T&gt;void sc(T &amp;x)</div><div class="line">&#123;</div><div class="line">    int f=1;char c;x=0;</div><div class="line">    while(c=getchar(),c&lt;48)if(c=='-')f=-1;</div><div class="line">    do x=x*10+(c^48);</div><div class="line">    while(c=getchar(),c&gt;47);</div><div class="line">    x*=f;</div><div class="line">&#125;</div><div class="line">template&lt;class T&gt;void nt(T x)</div><div class="line">&#123;</div><div class="line">    if(!x)return;</div><div class="line">    nt(x/10);</div><div class="line">    putchar(x%10+'0');</div><div class="line">&#125;</div><div class="line">template&lt;class T&gt;void pt(T x)</div><div class="line">&#123;</div><div class="line">    if(x&lt;0)putchar('-'),x=-x;</div><div class="line">    if(!x)putchar('0');</div><div class="line">    else nt(x);</div><div class="line">&#125;</div><div class="line">template&lt;class T&gt;void ptn(T x)</div><div class="line">&#123;</div><div class="line">    pt(x);putchar('\n');</div><div class="line">&#125;</div><div class="line">template&lt;class T&gt;void pts(T x)</div><div class="line">&#123;</div><div class="line">    pt(x);putchar(' ');</div><div class="line">&#125;</div><div class="line">template&lt;class T&gt;inline void Max(T &amp;x,T y)&#123;if(x&lt;y)x=y;&#125;</div><div class="line">template&lt;class T&gt;inline void Min(T &amp;x,T y)&#123;if(x&gt;y)x=y;&#125;</div><div class="line"></div><div class="line">const int maxn=100005;</div><div class="line">const int maxb=18;</div><div class="line">const int maxq=50005;</div><div class="line"></div><div class="line">namespace Tree</div><div class="line">&#123;</div><div class="line">    int tot,rt;</div><div class="line">    int lx[maxn],rx[maxn],dfs_clock;</div><div class="line">    int dep[maxn],sz[maxn];</div><div class="line">    int anc[maxn],par[maxn];</div><div class="line">    bool vis[maxn];</div><div class="line">    </div><div class="line">    int last[maxn],ecnt;</div><div class="line">    struct Edge</div><div class="line">    &#123;</div><div class="line">        int to,nxt;</div><div class="line">    &#125;e[maxn&lt;&lt;1];</div><div class="line">    void ins(int u,int v)</div><div class="line">    &#123;</div><div class="line">        e[ecnt]=(Edge)&#123;v,last[u]&#125;;</div><div class="line">        last[u]=ecnt++;</div><div class="line">    &#125;</div><div class="line">    void inses(int u,int v)</div><div class="line">    &#123;</div><div class="line">        ins(u,v);</div><div class="line">        ins(v,u);</div><div class="line">    &#125;</div><div class="line">    void Init()</div><div class="line">    &#123;</div><div class="line">        rep(i,0,tot+1)last[i]=-1;</div><div class="line">        ecnt=0;</div><div class="line">    &#125;</div><div class="line">    void predep(int x)</div><div class="line">    &#123;</div><div class="line">        vis[x]=true;</div><div class="line">        sz[x]=1;</div><div class="line">        travel(x)if(!vis[to])</div><div class="line">        &#123;</div><div class="line">            dep[to]=dep[x]+1;</div><div class="line">            par[to]=x;</div><div class="line">            predep(to);</div><div class="line">            sz[x]+=sz[to];</div><div class="line">        &#125;</div><div class="line">        vis[x]=false;</div><div class="line">    &#125;</div><div class="line">    void preanc(int x)</div><div class="line">    &#123;</div><div class="line">        vis[x]=true;</div><div class="line">        lx[x]=++dfs_clock;</div><div class="line">        int mx=0;</div><div class="line">        travel(x)</div><div class="line">            if(!vis[to]&amp;&amp;sz[to]&gt;sz[mx])</div><div class="line">            mx=to;</div><div class="line">    </div><div class="line">        if(!mx)</div><div class="line">        &#123;    </div><div class="line">            rx[x]=dfs_clock;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        anc[mx]=anc[x];</div><div class="line">        preanc(mx);</div><div class="line">        </div><div class="line">        travel(x)</div><div class="line">            if(!vis[to]&amp;&amp;to!=mx)</div><div class="line">            &#123;</div><div class="line">                anc[to]=to;</div><div class="line">                preanc(to);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        rx[x]=dfs_clock;</div><div class="line">    &#125;</div><div class="line">    void GetID()</div><div class="line">    &#123;</div><div class="line">        dep[rt]=1;</div><div class="line">        par[rt]=0;</div><div class="line">        predep(rt);</div><div class="line">        </div><div class="line">        dfs_clock=0;</div><div class="line">        anc[rt]=rt;    </div><div class="line">        preanc(rt);</div><div class="line">    &#125;</div><div class="line">    int LCA(int u,int v)</div><div class="line">    &#123;</div><div class="line">        for(;anc[u]!=anc[v];u=par[anc[u]])</div><div class="line">            if(dep[anc[u]]&lt;dep[anc[v]])swap(u,v);</div><div class="line">        return dep[u]&lt;dep[v]?u:v;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">//  freopen("pro.in","r",stdin);</div><div class="line">//  freopen("chk.out","w",stdout);</div><div class="line">//  int cas;sc(cas);</div><div class="line">//  while(cas--)solve();</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/23/按值域封装-套壳套壳再套壳-楼爷版/" itemprop="url">
+                  按值域封装-套壳套壳再套壳-楼爷版
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-08-23T14:57:00+08:00" content="2016-08-23">
+              2016-08-23
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>orz 楼爷<br>看了楼爷的<del>卡常</del>处理，感觉对写数论题非常有教育意义啊</p>
+<figure class="highlight"><table><tr><td class="code"><pre><div class="line">#include &lt;vector&gt;</div><div class="line">#include &lt;list&gt;</div><div class="line">#include &lt;map&gt;</div><div class="line">#include &lt;set&gt;</div><div class="line">#include &lt;deque&gt;</div><div class="line">#include &lt;queue&gt;</div><div class="line">#include &lt;stack&gt;</div><div class="line">#include &lt;bitset&gt;</div><div class="line">#include &lt;algorithm&gt;</div><div class="line">#include &lt;functional&gt;</div><div class="line">#include &lt;numeric&gt;</div><div class="line">#include &lt;utility&gt;</div><div class="line">#include &lt;sstream&gt;</div><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;iomanip&gt;</div><div class="line">#include &lt;cstdio&gt;</div><div class="line">#include &lt;cmath&gt;</div><div class="line">#include &lt;cstdlib&gt;</div><div class="line">#include &lt;cctype&gt;</div><div class="line">#include &lt;string&gt;</div><div class="line">#include &lt;cstring&gt;</div><div class="line">#include &lt;ctime&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line"> </div><div class="line">using namespace std;</div><div class="line"> </div><div class="line">typedef long long int64;</div><div class="line">typedef unsigned long long uint64;</div><div class="line">#define two(X) (1&lt;&lt;(X))</div><div class="line">#define twoL(X) (((int64)(1))&lt;&lt;(X))</div><div class="line">#define contain(S,X) (((S)&amp;two(X))!=0)</div><div class="line">#define containL(S,X) (((S)&amp;twoL(X))!=0)</div><div class="line">const double pi=acos(-1.0);</div><div class="line">const double eps=1e-11;</div><div class="line">template&lt;class T&gt; inline void checkmin(T &amp;a,T b)&#123;if(b&lt;a) a=b;&#125;</div><div class="line">template&lt;class T&gt; inline void checkmax(T &amp;a,T b)&#123;if(b&gt;a) a=b;&#125;</div><div class="line">template&lt;class T&gt; inline T sqr(T x)&#123;return x*x;&#125;</div><div class="line">typedef pair&lt;int,int&gt; ipair;</div><div class="line">#define SIZE(A) ((int)A.size())</div><div class="line">#define LENGTH(A) ((int)A.length())</div><div class="line">#define MP(A,B) make_pair(A,B)</div><div class="line">#define PB(X) push_back(X)</div><div class="line"> </div><div class="line">const int MOD=1000000007;</div><div class="line">const int maxm=10000000+16;</div><div class="line"> </div><div class="line">#define MUL(a,b) ((int)(((int64)(a))*((int64)(b))%MOD))</div><div class="line"> </div><div class="line">int n;</div><div class="line">int cid;</div><div class="line">int fid[maxm],pid[maxm];</div><div class="line">int p[maxm];</div><div class="line">int f[maxm];</div><div class="line"> </div><div class="line">int fast_power(int p,int e)</div><div class="line">&#123;</div><div class="line">	if (e==0) return 1;</div><div class="line">	if (e&amp;1) return MUL(fast_power(p,e-1),p);</div><div class="line">	return fast_power(MUL(p,p),e/2);</div><div class="line">&#125;</div><div class="line">int calcp(int m)</div><div class="line">&#123;</div><div class="line">	if (pid[m]==cid) return p[m];</div><div class="line">	pid[m]=cid;</div><div class="line">	return p[m]=fast_power(m,n);</div><div class="line">&#125;</div><div class="line">int solve(int m)</div><div class="line">&#123;</div><div class="line">	if (fid[m]==cid) return f[m];</div><div class="line">	fid[m]=cid;</div><div class="line">	int ret=calcp(m);</div><div class="line">	for (int i=2;i&lt;=m;i++) </div><div class="line">	&#123;</div><div class="line">		int w=m/i;</div><div class="line">		int j=m/w;</div><div class="line">		ret-=MUL(solve(w),j-i+1);</div><div class="line">		if (ret&lt;0) ret+=MOD;</div><div class="line">		i=j;</div><div class="line">	&#125;</div><div class="line">	return f[m]=ret;</div><div class="line">&#125;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">#ifdef _MSC_VER</div><div class="line">	freopen("input.txt","r",stdin);</div><div class="line">#endif</div><div class="line">	cid=0;</div><div class="line">	memset(fid,0,sizeof(fid));</div><div class="line">	memset(pid,0,sizeof(pid));</div><div class="line">	int testcase;</div><div class="line">	for (scanf("%d",&amp;testcase);testcase&gt;0;testcase--)</div><div class="line">	&#123;</div><div class="line">		cid++;</div><div class="line">		int m,L,R;</div><div class="line">		scanf("%d%d%d%d",&amp;n,&amp;m,&amp;L,&amp;R);</div><div class="line">		int ret=0;</div><div class="line">		for (int d=L;d&lt;=R;d++)</div><div class="line">		&#123;</div><div class="line">			ret+=solve(m/d);</div><div class="line">			if (ret&gt;=MOD) ret-=MOD;</div><div class="line">		&#125;</div><div class="line">		printf("%d\n",ret);</div><div class="line">	&#125;</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -548,17 +1166,24 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
 
           
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
 
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -609,7 +1234,7 @@
 <div class="theme-info">
   Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Muse
   </a>
 </div>
 

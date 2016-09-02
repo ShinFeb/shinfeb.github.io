@@ -1,0 +1,588 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="模板,虚树," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="原来写虚树都是用hzwer学长的写法，非常精妙也很高效，直到最近看到了Stilwell的做法。其实变化也不大，就是先按dfs序排一遍，把需要的lca都塞到后面，最后再来一次排序把lca插进对应的位置。用常数换精力感觉赚了一个亿。#include &amp;lt;set&amp;gt;#include &amp;lt;ctime&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;cstdio&amp;gt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一棵封装起来的虚树">
+<meta property="og:url" content="http://shinfeb.github.io/2016/08/26/一棵封装起来的虚树/index.html">
+<meta property="og:site_name" content="ShinFeb's Archieve">
+<meta property="og:description" content="原来写虚树都是用hzwer学长的写法，非常精妙也很高效，直到最近看到了Stilwell的做法。其实变化也不大，就是先按dfs序排一遍，把需要的lca都塞到后面，最后再来一次排序把lca插进对应的位置。用常数换精力感觉赚了一个亿。#include &amp;lt;set&amp;gt;#include &amp;lt;ctime&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;cstdio&amp;gt">
+<meta property="og:updated_time" content="2016-09-02T22:52:02.070Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一棵封装起来的虚树">
+<meta name="twitter:description" content="原来写虚树都是用hzwer学长的写法，非常精妙也很高效，直到最近看到了Stilwell的做法。其实变化也不大，就是先按dfs序排一遍，把需要的lca都塞到后面，最后再来一次排序把lca插进对应的位置。用常数换精力感觉赚了一个亿。#include &amp;lt;set&amp;gt;#include &amp;lt;ctime&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;cstdio&amp;gt">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://shinfeb.github.io/2016/08/26/一棵封装起来的虚树/"/>
+
+  <title> 一棵封装起来的虚树 | ShinFeb's Archieve </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">ShinFeb's Archieve</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">事了拂衣去，深藏功与名</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                一棵封装起来的虚树
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-08-26T14:13:00+08:00" content="2016-08-26">
+              2016-08-26
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>原来写虚树都是用hzwer学长的写法，非常精妙也很高效，直到最近看到了Stilwell的做法。<br>其实变化也不大，就是先按dfs序排一遍，把需要的lca都塞到后面，最后再来一次排序把lca插进对应的位置。<br>用常数换精力感觉赚了一个亿。<br><figure class="highlight"><table><tr><td class="code"><pre><div class="line">#include &lt;set&gt;</div><div class="line">#include &lt;ctime&gt;</div><div class="line">#include &lt;queue&gt;</div><div class="line">#include &lt;cstdio&gt;</div><div class="line">#include &lt;bitset&gt;</div><div class="line">#include &lt;cctype&gt;</div><div class="line">#include &lt;bitset&gt;</div><div class="line">#include &lt;cstdlib&gt;</div><div class="line">#include &lt;cassert&gt;</div><div class="line">#include &lt;cstring&gt;</div><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;algorithm&gt;</div><div class="line">#define inf (1&lt;&lt;30)</div><div class="line">#define INF (1ll&lt;&lt;62)</div><div class="line">#define fi first</div><div class="line">#define se second</div><div class="line">#define rep(x,s,t) for(register int x=s,t_=t;x&lt;t_;++x)</div><div class="line">#define per(x,s,t) for(register int x=t-1,s_=s;x&gt;=s_;--x)</div><div class="line">#define travel(x) for(int I=last[x],to;~I&amp;&amp;(to=e[I].to);I=e[I].nxt)</div><div class="line">#define prt(x) cout&lt;&lt;#x&lt;&lt;":"&lt;&lt;x&lt;&lt;" "</div><div class="line">#define prtn(x) cout&lt;&lt;#x&lt;&lt;":"&lt;&lt;x&lt;&lt;endl</div><div class="line">#define pb(x) push_back(x)</div><div class="line">#define hash asfmaljkg</div><div class="line">#define rank asfjhgskjf</div><div class="line">#define y1 asggnja</div><div class="line">#define y2 slfvm</div><div class="line">using namespace std;</div><div class="line">typedef long long ll;</div><div class="line">typedef pair&lt;int,int&gt; ii;</div><div class="line">template&lt;class T&gt;void sc(T &amp;x)</div><div class="line">&#123;</div><div class="line">    int f=1;char c;x=0;</div><div class="line">    while(c=getchar(),c&lt;48)if(c=='-')f=-1;</div><div class="line">    do x=x*10+(c^48);</div><div class="line">    while(c=getchar(),c&gt;47);</div><div class="line">    x*=f;</div><div class="line">&#125;</div><div class="line">template&lt;class T&gt;void nt(T x)</div><div class="line">&#123;</div><div class="line">    if(!x)return;</div><div class="line">    nt(x/10);</div><div class="line">    putchar(x%10+'0');</div><div class="line">&#125;</div><div class="line">template&lt;class T&gt;void pt(T x)</div><div class="line">&#123;</div><div class="line">    if(x&lt;0)putchar('-'),x=-x;</div><div class="line">    if(!x)putchar('0');</div><div class="line">    else nt(x);</div><div class="line">&#125;</div><div class="line">template&lt;class T&gt;void ptn(T x)</div><div class="line">&#123;</div><div class="line">    pt(x);putchar('\n');</div><div class="line">&#125;</div><div class="line">template&lt;class T&gt;void pts(T x)</div><div class="line">&#123;</div><div class="line">    pt(x);putchar(' ');</div><div class="line">&#125;</div><div class="line">template&lt;class T&gt;inline void Max(T &amp;x,T y)&#123;if(x&lt;y)x=y;&#125;</div><div class="line">template&lt;class T&gt;inline void Min(T &amp;x,T y)&#123;if(x&gt;y)x=y;&#125;</div><div class="line"></div><div class="line">const int maxn=250005;</div><div class="line">const int maxb=20;</div><div class="line"></div><div class="line">int n,m;</div><div class="line"></div><div class="line">namespace Tree</div><div class="line">&#123;</div><div class="line">    int rt;</div><div class="line">    int lx[maxn],rx[maxn],dfs_clock;</div><div class="line">    int dep[maxn];</div><div class="line">    </div><div class="line">    int fa[maxb][maxn];</div><div class="line">    </div><div class="line">    bool vis[maxn];</div><div class="line">    </div><div class="line">    int last[maxn],ecnt;</div><div class="line">    struct Edge</div><div class="line">    &#123;</div><div class="line">        int to,nxt,cost;</div><div class="line">    &#125;e[maxn&lt;&lt;1];</div><div class="line">    void ins(int u,int v,int w)</div><div class="line">    &#123;</div><div class="line">        e[ecnt]=(Edge)&#123;v,last[u],w&#125;;</div><div class="line">        last[u]=ecnt++;</div><div class="line">    &#125;</div><div class="line">    void inses(int u,int v,int w)</div><div class="line">    &#123;</div><div class="line">        ins(u,v,w);</div><div class="line">        ins(v,u,w);</div><div class="line">    &#125;</div><div class="line">    void Init()</div><div class="line">    &#123;</div><div class="line">        rep(i,0,n+1)last[i]=-1;</div><div class="line">        ecnt=0;</div><div class="line">    &#125;</div><div class="line">    void predfs(int x)</div><div class="line">    &#123;</div><div class="line">        vis[x]=true;</div><div class="line">        lx[x]=++dfs_clock;</div><div class="line">        travel(x)if(!vis[to])</div><div class="line">        &#123;</div><div class="line">            dep[to]=dep[x]+1;</div><div class="line">                    </div><div class="line">            fa[0][to]=x;</div><div class="line">            </div><div class="line">            for(int i=0;fa[i][to];i++)</div><div class="line">                fa[i+1][to]=fa[i][fa[i][to]];</div><div class="line">        </div><div class="line">            predfs(to);</div><div class="line">        &#125;</div><div class="line">        rx[x]=dfs_clock;</div><div class="line">        vis[x]=false;</div><div class="line">    &#125;</div><div class="line">    void GetID()</div><div class="line">    &#123;</div><div class="line">        dep[rt]=1;</div><div class="line">        fa[0][rt]=0;</div><div class="line">        dfs_clock=0;</div><div class="line">        </div><div class="line">        predfs(rt);</div><div class="line">    &#125;</div><div class="line">    int LCA(int u,int v)</div><div class="line">    &#123;</div><div class="line">        if(dep[u]&lt;dep[v])swap(u,v);</div><div class="line">        int t=dep[u]-dep[v];</div><div class="line">        rep(i,0,maxb)</div><div class="line">            if(t&amp;1&lt;&lt;i)</div><div class="line">                u=fa[i][u];</div><div class="line">        if(u==v)return u;</div><div class="line">        per(i,0,maxb)</div><div class="line">            if(fa[i][u]!=fa[i][v])</div><div class="line">            &#123;</div><div class="line">                u=fa[i][u];</div><div class="line">                v=fa[i][v];</div><div class="line">            &#125;</div><div class="line">        return fa[0][u];</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">namespace VTree</div><div class="line">&#123;</div><div class="line">    int tot;</div><div class="line">    </div><div class="line">    int a[maxn];</div><div class="line">    int stk[maxn];</div><div class="line">    int app[maxn],aid;</div><div class="line">    </div><div class="line">    bool vis[maxn];</div><div class="line">    </div><div class="line">    int last[maxn],ecnt;</div><div class="line">    struct Edge</div><div class="line">    &#123;</div><div class="line">        int to,nxt;</div><div class="line">    &#125;e[maxn&lt;&lt;1];</div><div class="line">    void ins(int u,int v)</div><div class="line">    &#123;</div><div class="line">        e[ecnt]=(Edge)&#123;v,last[u]&#125;;</div><div class="line">        last[u]=ecnt++;</div><div class="line">    &#125;</div><div class="line">    void inses(int u,int v)</div><div class="line">    &#123;</div><div class="line">        ins(u,v);</div><div class="line">        ins(v,u);</div><div class="line">    &#125;</div><div class="line">    void Clear()</div><div class="line">    &#123;</div><div class="line">        tot=0;</div><div class="line">        ecnt=0;</div><div class="line">        ++aid;</div><div class="line">    &#125;</div><div class="line">    void Push(int x)</div><div class="line">    &#123;</div><div class="line">        if(app[x]==aid)return;</div><div class="line">        a[tot++]=x;</div><div class="line">        app[x]=aid;</div><div class="line">        last[x]=-1;</div><div class="line">    &#125;</div><div class="line">    bool cmp(int x,int y)</div><div class="line">    &#123;</div><div class="line">        return Tree::lx[x]&lt;Tree::lx[y];</div><div class="line">    &#125;</div><div class="line">    void Build()</div><div class="line">    &#123;</div><div class="line">        sort(a,a+tot,cmp);</div><div class="line">        rep(i,0,tot-1)</div><div class="line">        &#123;</div><div class="line">            int l=Tree::LCA(a[i],a[i+1]);</div><div class="line">            if(app[l]!=aid)</div><div class="line">                Push(l);</div><div class="line">        &#125;</div><div class="line">        if(app[Tree::rt]!=aid)</div><div class="line">            Push(Tree::rt);</div><div class="line">        </div><div class="line">        sort(a,a+tot,cmp);</div><div class="line">        int top=0;</div><div class="line">        stk[++top]=a[0];</div><div class="line">        rep(i,1,tot)</div><div class="line">        &#123;</div><div class="line">            int u=a[i],v;</div><div class="line">            for(;;top--)</div><div class="line">            &#123;</div><div class="line">                v=stk[top];</div><div class="line">                if(Tree::lx[v]&lt;=Tree::lx[u]&amp;&amp;Tree::rx[u]&lt;=Tree::rx[v])break;</div><div class="line">            &#125;</div><div class="line">            inses(u,v);</div><div class="line">            stk[++top]=u;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">//  freopen("pro.in","r",stdin);</div><div class="line">//  freopen("chk.out","w",stdout);</div><div class="line">//  int cas;sc(cas);</div><div class="line">//  while(cas--)solve();</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/模板/" rel="tag">#模板</a>
+          
+            <a href="/tags/虚树/" rel="tag">#虚树</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/26/2016-08-26-a-skip-heavy-chain-ask-lca-tree/" rel="next" title="一棵跳重链求lca的树">
+                <i class="fa fa-chevron-left"></i> 一棵跳重链求lca的树
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/31/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="ShinFeb" />
+          <p class="site-author-name" itemprop="name">ShinFeb</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ShinFeb</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
