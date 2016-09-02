@@ -235,8 +235,103 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/02/Template-NTT/" itemprop="url">
+                  Template NTT
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-02T22:04:26+08:00" content="2016-09-02">
+              2016-09-02
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="http://uoj.ac/submission/95610" target="_blank" rel="external">NTT模板</a></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn=<span class="number">262144</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> g=<span class="number">3</span>,ng=<span class="number">332748118</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">qpow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> mod=::mod)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> c=<span class="number">1</span>;</div><div class="line">	<span class="keyword">for</span>(;b;b&gt;&gt;=<span class="number">1</span>,a=(ll)a*a%mod)</div><div class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>)c=(ll)a*c%mod;</div><div class="line">	<span class="keyword">return</span> c;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">int</span> a[maxn],b[maxn];</div><div class="line"><span class="keyword">namespace</span> FFT&#123;</div><div class="line">	<span class="keyword">int</span> n,L,rev[maxn];</div><div class="line">	<span class="keyword">int</span> G[maxb],nG[maxb],fra;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">dft</span><span class="params">(<span class="keyword">int</span> *a,<span class="keyword">int</span> f)</span></span></div><div class="line">	&#123;</div><div class="line">		rep(i,<span class="number">0</span>,n)<span class="keyword">if</span>(rev[i]&lt;i)swap(a[i],a[rev[i]]);</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> m=<span class="number">1</span>,now=<span class="number">1</span>;m&lt;n;m&lt;&lt;=<span class="number">1</span>,now++)</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">int</span> w=f==<span class="number">1</span>?G[now]:nG[now];</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i+=m&lt;&lt;<span class="number">1</span>)</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">int</span> cur=<span class="number">1</span>;</div><div class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;m;j++)</div><div class="line">				&#123;</div><div class="line">					<span class="keyword">int</span> x=a[i+j],y=<span class="number">1l</span>l*a[i+j+m]*cur%mod;</div><div class="line">					a[i+j]=(x+y)%mod;</div><div class="line">					a[i+j+m]=(x-y+mod)%mod;</div><div class="line">					cur=<span class="number">1l</span>l*cur*w%mod;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span>(f==<span class="number">-1</span>)rep(i,<span class="number">0</span>,n)a[i]=<span class="number">1l</span>l*a[i]*fra%mod;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">InitN</span><span class="params">(<span class="keyword">int</span> nn)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span>(n=<span class="number">1</span>,L=<span class="number">0</span>;n&lt;nn;n&lt;&lt;=<span class="number">1</span>)L++;</div><div class="line">		rep(i,<span class="number">1</span>,n)rev[i]=(rev[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)&lt;&lt;L<span class="number">-1</span>);</div><div class="line">		fra=qpow(n,mod<span class="number">-2</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">InitG</span><span class="params">()</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">int</span> tmp=mod<span class="number">-1</span>,t=<span class="number">0</span>;</div><div class="line">		<span class="keyword">do</span>&#123;</div><div class="line">			tmp&gt;&gt;=<span class="number">1</span>;</div><div class="line">			G[++t]=qpow(g,tmp);</div><div class="line">			nG[t]=qpow(ng,tmp);</div><div class="line">		&#125;<span class="keyword">while</span>(~tmp&amp;<span class="number">1</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fft</span><span class="params">(<span class="keyword">int</span> *a,<span class="keyword">int</span> *b,<span class="keyword">int</span> *c,<span class="keyword">int</span> na,<span class="keyword">int</span> nb,<span class="keyword">int</span> &amp;nc)</span></span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">int</span> nn=na+nb<span class="number">-1</span>;</div><div class="line">		InitN(nn);</div><div class="line">		rep(i,na,n)a[i]=<span class="number">0</span>;</div><div class="line">		rep(i,nb,n)b[i]=<span class="number">0</span>;</div><div class="line">		dft(a,<span class="number">1</span>);dft(b,<span class="number">1</span>);</div><div class="line">		rep(i,<span class="number">0</span>,n)c[i]=(ll)a[i]*b[i]%mod;</div><div class="line">		dft(c,<span class="number">-1</span>);</div><div class="line">		nc=nn;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/31/Hello-github/" itemprop="url">
-                  Hello github
+                  Hello GitHub!
                 </a>
               
             
@@ -279,7 +374,7 @@
       
         
           
-            <h1 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h1><h2 id="小标题"><a href="#小标题" class="headerlink" title="小标题"></a>小标题</h2><p>latex: $O(n^2)$</p>
+            <h1 id="title"><a href="#title" class="headerlink" title="title"></a>title</h1><h2 id="subtitle"><a href="#subtitle" class="headerlink" title="subtitle"></a>subtitle</h2><p>latex: $O(n^2)$</p>
 <p>$$<br>k^{k^{k^{k^{k^{k^{k^{k^{k^{k^{k^{k}}}}}}}}}}}<br>$$</p>
 <figure class="highlight"><table><tr><td class="code"><pre><div class="line">#include &lt;set&gt;</div><div class="line">#include &lt;map&gt;</div><div class="line">#include &lt;cmath&gt;</div><div class="line">#include &lt;queue&gt;</div><div class="line">#include &lt;stack&gt;</div><div class="line">#include &lt;ctime&gt;</div><div class="line">#include &lt;cstdio&gt;</div><div class="line">#include &lt;bitset&gt;</div><div class="line">#include &lt;cctype&gt;</div><div class="line">#include &lt;cstring&gt;</div><div class="line">#include &lt;cassert&gt;</div><div class="line">#include &lt;cstring&gt;</div><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;algorithm&gt;</div><div class="line"></div><div class="line">using namespace std;</div><div class="line"></div><div class="line">#define fi first</div><div class="line">#define se second</div><div class="line">#define rep(x,s,t) for(register int t_=t,x=s;x&lt;t_;x++)</div><div class="line">#define per(x,s,t) for(register int s_=s,x=(t)-1;x&gt;=s_;x--)</div><div class="line">#define travel(x) for(int I=last[x],to;I&amp;&amp;(to=e[I].to);I=e[I].nxt)</div><div class="line">#define prt(x) cout&lt;&lt;#x&lt;&lt;":"&lt;&lt;x&lt;&lt;" "</div><div class="line">#define prtn(x) cout&lt;&lt;#x&lt;&lt;":"&lt;&lt;x&lt;&lt;endl</div><div class="line">#define y1 asfkagn</div><div class="line">#define y2 fansfk</div><div class="line">#define rank gkalsfm</div><div class="line">#define hash gafgalsf</div><div class="line">#define inf (1&lt;&lt;30)</div><div class="line">#define INF (1ll&lt;&lt;61)</div><div class="line">#define showtime printf("%f",1.0*clock()/CLOCKS_PER_SEC)</div></pre></td></tr></table></figure>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">double</span> db;</div><div class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; ii;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">long</span> <span class="keyword">double</span> pi=<span class="built_in">acos</span>(<span class="number">-1</span>);</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">sc</span><span class="params">(T &amp;x)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> f=<span class="number">1</span>;<span class="keyword">char</span> c;x=<span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(c=getchar(),c&lt;<span class="number">48</span>)<span class="keyword">if</span>(c==<span class="string">'-'</span>)f=<span class="number">-1</span>;</div><div class="line">	<span class="keyword">do</span> x=x*<span class="number">10</span>+(c^<span class="number">48</span>);</div><div class="line">	<span class="keyword">while</span>(c=getchar(),c&gt;<span class="number">47</span>);</div><div class="line">	x*=f;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">nt</span><span class="params">(T x)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(!x)<span class="keyword">return</span>;</div><div class="line">	nt(x/<span class="number">10</span>);</div><div class="line">	<span class="built_in">putchar</span>(<span class="string">'0'</span>+x%<span class="number">10</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">pt</span><span class="params">(T x)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(x&lt;<span class="number">0</span>)x=-x,<span class="built_in">putchar</span>(<span class="string">'-'</span>);</div><div class="line">	<span class="keyword">if</span>(!x)<span class="built_in">putchar</span>(<span class="string">'0'</span>);</div><div class="line">	<span class="keyword">else</span> nt(x);</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">pts</span><span class="params">(T x)</span></span></div><div class="line">&#123;</div><div class="line">	pt(x);<span class="built_in">putchar</span>(<span class="string">' '</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">ptn</span><span class="params">(T x)</span></span></div><div class="line">&#123;</div><div class="line">	pt(x);<span class="built_in">putchar</span>(<span class="string">'\n'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Max</span><span class="params">(T &amp;x,T y)</span></span>&#123;<span class="keyword">if</span>(x&lt;y)x=y;&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Min</span><span class="params">(T &amp;x,T y)</span></span>&#123;<span class="keyword">if</span>(x&gt;y)x=y;&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line"><span class="comment">//	freopen("pro.in","r",stdin);</span></div><div class="line"><span class="comment">//	freopen("chk.out","w",stdout);</span></div><div class="line"></div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -453,7 +548,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -463,7 +558,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
