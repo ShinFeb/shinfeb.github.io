@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="后缀自动机," />
 
 
 
@@ -84,12 +84,28 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="ShinFeb's Archieve">
-<meta property="og:url" content="http://shinfeb.github.io/index.html">
+<meta name="description" content="根到每个节点的每一条路径对应每一种子串。
+关于自动机中的一个节点的大小，就是所能表示的最长子串的长度。
+一个节点表示的子串都是后缀关系，即其中一个是另一个的后缀。
+当节点a表示的最长子串是节点b表示的最长子串的后缀，节点a可以由节点b跳到，可以看做是对一种蕴含关系的遍历。
+当一个节点表示的一个子串是别的点表示的子串的后缀，而该节点表示的其他子串可能不是，就得把这个节点拆开来，需要哪个就把哪个当儿子">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈后缀自动机">
+<meta property="og:url" content="http://shinfeb.github.io/2016/09/05/浅谈后缀自动机/index.html">
 <meta property="og:site_name" content="ShinFeb's Archieve">
+<meta property="og:description" content="根到每个节点的每一条路径对应每一种子串。
+关于自动机中的一个节点的大小，就是所能表示的最长子串的长度。
+一个节点表示的子串都是后缀关系，即其中一个是另一个的后缀。
+当节点a表示的最长子串是节点b表示的最长子串的后缀，节点a可以由节点b跳到，可以看做是对一种蕴含关系的遍历。
+当一个节点表示的一个子串是别的点表示的子串的后缀，而该节点表示的其他子串可能不是，就得把这个节点拆开来，需要哪个就把哪个当儿子">
+<meta property="og:updated_time" content="2016-09-06T05:44:30.099Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ShinFeb's Archieve">
+<meta name="twitter:title" content="浅谈后缀自动机">
+<meta name="twitter:description" content="根到每个节点的每一条路径对应每一种子串。
+关于自动机中的一个节点的大小，就是所能表示的最长子串的长度。
+一个节点表示的子串都是后缀关系，即其中一个是另一个的后缀。
+当节点a表示的最长子串是节点b表示的最长子串的后缀，节点a可以由节点b跳到，可以看做是对一种蕴含关系的遍历。
+当一个节点表示的一个子串是别的点表示的子串的后缀，而该节点表示的其他子串可能不是，就得把这个节点拆开来，需要哪个就把哪个当儿子">
 
 
 
@@ -110,9 +126,9 @@
 
 
 
-  <link rel="canonical" href="http://shinfeb.github.io/"/>
+  <link rel="canonical" href="http://shinfeb.github.io/2016/09/05/浅谈后缀自动机/"/>
 
-  <title> ShinFeb's Archieve </title>
+  <title> 浅谈后缀自动机 | ShinFeb's Archieve </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -133,9 +149,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -212,9 +226,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -234,10 +248,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/09/05/浅谈后缀自动机/" itemprop="url">
-                  浅谈后缀自动机
-                </a>
+                浅谈后缀自动机
               
             
           </h1>
@@ -277,9 +288,7 @@
       
 
       
-        
-          
-            <p>根到每个节点的每一条路径对应每一种子串。</p>
+        <p>根到每个节点的每一条路径对应每一种子串。</p>
 <p>关于自动机中的一个节点的大小，就是所能表示的最长子串的长度。</p>
 <p>一个节点表示的子串都是后缀关系，即其中一个是另一个的后缀。</p>
 <p>当节点a表示的最长子串是节点b表示的最长子串的后缀，节点a可以由节点b跳到，可以看做是对一种蕴含关系的遍历。</p>
@@ -294,341 +303,59 @@
 </blockquote>
 <p>转载自<a href="http://blog.csdn.net/huyuncong/article/details/7583214" target="_blank" rel="external">【字符串新武器】后缀自动机-huyuncong</a></p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/03/物理竞赛随想/" itemprop="url">
-                  物理竞赛随想
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-09-03T15:59:19+08:00" content="2016-09-03">
-              2016-09-03
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-
-          
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/后缀自动机/" rel="tag">#后缀自动机</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h2 id="竞赛"><a href="#竞赛" class="headerlink" title="竞赛"></a>竞赛</h2><p>刚刚参加完了一年一度的物理竞赛。只是一个市里的竞赛。</p>
-<p>大家都没做什么准备，学校的意思也好像是大家随便考考就好(?)。</p>
-<p>在坐满了人的大巴上，我开始想象着我是一个为这个竞赛准备了很久的一个学生。因为紧张，所以我脑子里空空的。我回忆起这一年里我的生活，一种依然混乱、怠惰的生活。如果只是为了一场竞赛，是否值得付出那么多的时间？</p>
-<p>以前读《维特根斯坦传》时，看到维特根斯坦的一句话：</p>
-<blockquote>
-<p>学习哲学还有什么用，如果哲学只是让你看上去有道理的谈论某些逻辑问题，如果哲学不能改变你对生活中重大问题的思考……</p>
-</blockquote>
-<p>放在竞赛上也同样适用吧</p>
-<h2 id="物理"><a href="#物理" class="headerlink" title="物理"></a>物理</h2><p>依然没有掌握好物理。掌握了就该自信的面对自己写过的每道题。</p>
-<p>有的时候说这什么的太难了，留着以后再去填吧。</p>
-<p>她看起来很冷，但熟悉之后就会发现她热的一面。</p>
-<p>时间很多的不是么，如果不接触一些陌生的东西消磨一些，就难免在熟悉的地方无所适从。</p>
-<p>不过可能是因为太久没考物理了，写物理题的方式和以前大有不同，感觉物理比以前亲切了许多，但从效率来说是很糟糕的革新。</p>
-<p>等以后一切结束了就去学好物理吧。期待着Ginger请教。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/09/03/物理竞赛随想/" rel="next" title="物理竞赛随想">
+                <i class="fa fa-chevron-left"></i> 物理竞赛随想
+              </a>
             
-              
-                
-                <a class="post-title-link" href="/2016/08/31/Hello-github/" itemprop="url">
-                  Hello GitHub!
-                </a>
-              
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
             
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-08-31T22:30:44+08:00" content="2016-08-31">
-              2016-08-31
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h1 id="title"><a href="#title" class="headerlink" title="title"></a>title</h1><h2 id="subtitle"><a href="#subtitle" class="headerlink" title="subtitle"></a>subtitle</h2><p>latex: $O(n^2)$</p>
-<p>$$<br>k^{k^{k^{k^{k^{k^{k^{k^{k^{k^{k^{k}}}}}}}}}}}<br>$$</p>
-<figure class="highlight"><table><tr><td class="code"><pre><div class="line">#include &lt;set&gt;</div><div class="line">#include &lt;map&gt;</div><div class="line">#include &lt;cmath&gt;</div><div class="line">#include &lt;queue&gt;</div><div class="line">#include &lt;stack&gt;</div><div class="line">#include &lt;ctime&gt;</div><div class="line">#include &lt;cstdio&gt;</div><div class="line">#include &lt;bitset&gt;</div><div class="line">#include &lt;cctype&gt;</div><div class="line">#include &lt;cstring&gt;</div><div class="line">#include &lt;cassert&gt;</div><div class="line">#include &lt;cstring&gt;</div><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;algorithm&gt;</div><div class="line"></div><div class="line">using namespace std;</div><div class="line"></div><div class="line">#define fi first</div><div class="line">#define se second</div><div class="line">#define rep(x,s,t) for(register int t_=t,x=s;x&lt;t_;x++)</div><div class="line">#define per(x,s,t) for(register int s_=s,x=(t)-1;x&gt;=s_;x--)</div><div class="line">#define travel(x) for(int I=last[x],to;I&amp;&amp;(to=e[I].to);I=e[I].nxt)</div><div class="line">#define prt(x) cout&lt;&lt;#x&lt;&lt;":"&lt;&lt;x&lt;&lt;" "</div><div class="line">#define prtn(x) cout&lt;&lt;#x&lt;&lt;":"&lt;&lt;x&lt;&lt;endl</div><div class="line">#define y1 asfkagn</div><div class="line">#define y2 fansfk</div><div class="line">#define rank gkalsfm</div><div class="line">#define hash gafgalsf</div><div class="line">#define inf (1&lt;&lt;30)</div><div class="line">#define INF (1ll&lt;&lt;61)</div><div class="line">#define showtime printf("%f",1.0*clock()/CLOCKS_PER_SEC)</div></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">double</span> db;</div><div class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; ii;</div><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">long</span> <span class="keyword">double</span> pi=<span class="built_in">acos</span>(<span class="number">-1</span>);</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">sc</span><span class="params">(T &amp;x)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> f=<span class="number">1</span>;<span class="keyword">char</span> c;x=<span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(c=getchar(),c&lt;<span class="number">48</span>)<span class="keyword">if</span>(c==<span class="string">'-'</span>)f=<span class="number">-1</span>;</div><div class="line">	<span class="keyword">do</span> x=x*<span class="number">10</span>+(c^<span class="number">48</span>);</div><div class="line">	<span class="keyword">while</span>(c=getchar(),c&gt;<span class="number">47</span>);</div><div class="line">	x*=f;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">nt</span><span class="params">(T x)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(!x)<span class="keyword">return</span>;</div><div class="line">	nt(x/<span class="number">10</span>);</div><div class="line">	<span class="built_in">putchar</span>(<span class="string">'0'</span>+x%<span class="number">10</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">pt</span><span class="params">(T x)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(x&lt;<span class="number">0</span>)x=-x,<span class="built_in">putchar</span>(<span class="string">'-'</span>);</div><div class="line">	<span class="keyword">if</span>(!x)<span class="built_in">putchar</span>(<span class="string">'0'</span>);</div><div class="line">	<span class="keyword">else</span> nt(x);</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">pts</span><span class="params">(T x)</span></span></div><div class="line">&#123;</div><div class="line">	pt(x);<span class="built_in">putchar</span>(<span class="string">' '</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">ptn</span><span class="params">(T x)</span></span></div><div class="line">&#123;</div><div class="line">	pt(x);<span class="built_in">putchar</span>(<span class="string">'\n'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Max</span><span class="params">(T &amp;x,T y)</span></span>&#123;<span class="keyword">if</span>(x&lt;y)x=y;&#125;</div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Min</span><span class="params">(T &amp;x,T y)</span></span>&#123;<span class="keyword">if</span>(x&gt;y)x=y;&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line"><span class="comment">//	freopen("pro.in","r",stdin);</span></div><div class="line"><span class="comment">//	freopen("chk.out","w",stdout);</span></div><div class="line"></div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-      
 
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/31/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-08-31T22:11:12+08:00" content="2016-08-31">
-              2016-08-31
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
-        
+    <div class="post-spread">
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
@@ -636,6 +363,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -655,8 +386,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -699,6 +439,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -795,6 +546,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
