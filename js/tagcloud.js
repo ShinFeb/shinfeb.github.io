@@ -1,12 +1,1 @@
-<% if="" (site.tags.length){="" %="">
-    <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
-    <div class="widget-wrap">
-        <h3 class="widget-title"><%= __('tagcloud')="" %=""></%=></h3>
-        <div id="myCanvasContainer" class="widget tagcloud">
-            <canvas width="250" height="250" id="resCanvas" style="width=100%">
-                <%- tagcloud()="" %="">
-            </%-></canvas>
-        </div>
-    </div>
-<% }="" %=""></%></%><link href="/css/prism-tomorrow.css" rel="stylesheet">
+window.onload = function() { try { TagCanvas.textFont = 'Trebuchet MS, Helvetica, sans-serif'; TagCanvas.textColour = '#333'; TagCanvas.textHeight = 25; TagCanvas.outlineColour = '#E2E1C1'; TagCanvas.outlineMethod = 'block'; TagCanvas.maxSpeed = 0.03; TagCanvas.minBrightness = 0.2; TagCanvas.depth = 0.92; TagCanvas.pulsateTo = 0.6; TagCanvas.initial = [0.1,-0.1]; TagCanvas.decel = 0.98; TagCanvas.reverse = true; TagCanvas.hideTags = false; TagCanvas.shadow = '#ccf'; TagCanvas.shadowBlur = 3; TagCanvas.weight = false; TagCanvas.imageScale = null; TagCanvas.fadeIn = 1000; TagCanvas.clickToFront = 600; TagCanvas.Start('resCanvas'); TagCanvas.tc['resCanvas'].Wheel(false)} catch(e) { console.log(e); document.getElementById('myCanvasContainer').style.display = 'none'; } };
