@@ -91,7 +91,7 @@
 当一个节点表示的一个子串">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈后缀自动机">
-<meta property="og:url" content="http://shinfeb.github.io/2016/09/05/浅谈后缀自动机/index.html">
+<meta property="og:url" content="http://shinfeb.github.io/2016/浅谈后缀自动机/index.html">
 <meta property="og:site_name" content="ShinFeb's Archieve">
 <meta property="og:description" content="根到每个节点的每一条路径对应每一种子串，无一重复，无一遗漏。
 关于自动机中的一个节点的大小，就是其所能表示的最长子串的长度。
@@ -126,7 +126,7 @@
 
 
 
-  <link rel="canonical" href="http://shinfeb.github.io/2016/09/05/浅谈后缀自动机/"/>
+  <link rel="canonical" href="http://shinfeb.github.io/2016/浅谈后缀自动机/"/>
 
   <title> 浅谈后缀自动机 | ShinFeb's Archieve </title>
 </head>
@@ -293,7 +293,48 @@
 <p>一个节点表示的子串都是后缀关系，即其中一个是另一个的后缀。他们的长度连续，并可以由一个右端点联系起来。</p>
 <p>当节点a表示的最长子串是节点b表示的最长子串的后缀，节点a可以由节点b跳到，可以看做是对一种蕴含关系的遍历。另外，b可以把自己的右端点分享给a。</p>
 <p>当一个节点表示的一个子串是别的点表示的子串的后缀，而该节点表示的其他子串可能不是，就得把这个节点拆开来，需要哪个就把哪个当儿子。</p>
-<p>附一份优雅的代码<br><figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">struct</span> suffix_automaton</div><div class="line">&#123;</div><div class="line">    <span class="built_in">string</span> s;</div><div class="line">    <span class="keyword">int</span> son[maxn][<span class="number">26</span>],pre[maxn],step[maxn],last,total;</div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">push_back</span><span class="params">(<span class="keyword">int</span> v)</span></span></div><div class="line">    &#123;</div><div class="line">        step[++total]=v;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Extend</span><span class="params">(<span class="keyword">char</span> ch)</span></span></div><div class="line">    &#123;</div><div class="line">        push_back(step[last]+<span class="number">1</span>);</div><div class="line">        <span class="keyword">int</span> p=last,np=total;</div><div class="line">        <span class="keyword">for</span> (; !son[p][ch]; p=pre[p]) son[p][ch]=np;</div><div class="line">        <span class="keyword">if</span> (!p) pre[np]=<span class="number">1</span>;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> q=son[p][ch];</div><div class="line">            <span class="keyword">if</span> (step[q]!=step[p]+<span class="number">1</span>)</div><div class="line">            &#123;</div><div class="line">                push_back(step[p]+<span class="number">1</span>);</div><div class="line">                <span class="keyword">int</span> nq=total;</div><div class="line">                <span class="built_in">memcpy</span>(son[nq],son[q],<span class="keyword">sizeof</span>(son[q]));</div><div class="line">                pre[nq]=pre[q];</div><div class="line">                pre[q]=pre[np]=nq;</div><div class="line">                <span class="keyword">for</span> (; son[p][ch]==q; p=pre[p]) son[p][ch]=nq;</div><div class="line">            &#125;  <span class="keyword">else</span> pre[np]=q;</div><div class="line">        &#125;</div><div class="line">        last=np;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Build</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="built_in">cin</span>&gt;&gt;s;</div><div class="line">        total=last=<span class="number">1</span>;</div><div class="line">        <span class="built_in">memset</span>(son,<span class="number">0</span>,<span class="keyword">sizeof</span>(son));</div><div class="line">        <span class="built_in">memset</span>(pre,<span class="number">0</span>,<span class="keyword">sizeof</span>(pre));</div><div class="line">        <span class="built_in">memset</span>(step,<span class="number">0</span>,<span class="keyword">sizeof</span>(step));</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>,End=s.size(); i!=End; i++) Extend(s[i]-<span class="string">'A'</span>);</div><div class="line">        visit(<span class="number">1</span>,<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">&#125; suf;</div></pre></td></tr></table></figure></p>
+<p>附一份优雅的代码</p>
+<pre class="language-cpp"><code class="language-cpp"><span class="token keyword" >struct</span> suffix_automaton
+<span class="token punctuation" >{</span>
+    string s<span class="token punctuation" >;</span>
+    <span class="token keyword" >int</span> son<span class="token punctuation" >[</span>maxn<span class="token punctuation" >]</span><span class="token punctuation" >[</span><span class="token number" >26</span><span class="token punctuation" >]</span><span class="token punctuation" >,</span>pre<span class="token punctuation" >[</span>maxn<span class="token punctuation" >]</span><span class="token punctuation" >,</span>step<span class="token punctuation" >[</span>maxn<span class="token punctuation" >]</span><span class="token punctuation" >,</span>last<span class="token punctuation" >,</span>total<span class="token punctuation" >;</span>
+    <span class="token keyword" >inline</span> <span class="token keyword" >void</span> <span class="token function" >push_back</span><span class="token punctuation" >(</span><span class="token keyword" >int</span> v<span class="token punctuation" >)</span>
+    <span class="token punctuation" >{</span>
+        step<span class="token punctuation" >[</span><span class="token operator" >++</span>total<span class="token punctuation" >]</span><span class="token operator" >=</span>v<span class="token punctuation" >;</span>
+    <span class="token punctuation" >}</span>
+    <span class="token keyword" >void</span> <span class="token function" >Extend</span><span class="token punctuation" >(</span><span class="token keyword" >char</span> ch<span class="token punctuation" >)</span>
+    <span class="token punctuation" >{</span>
+        <span class="token function" >push_back</span><span class="token punctuation" >(</span>step<span class="token punctuation" >[</span>last<span class="token punctuation" >]</span><span class="token operator" >+</span><span class="token number" >1</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+        <span class="token keyword" >int</span> p<span class="token operator" >=</span>last<span class="token punctuation" >,</span>np<span class="token operator" >=</span>total<span class="token punctuation" >;</span>
+        <span class="token keyword" >for</span> <span class="token punctuation" >(</span><span class="token punctuation" >;</span> <span class="token operator" >!</span>son<span class="token punctuation" >[</span>p<span class="token punctuation" >]</span><span class="token punctuation" >[</span>ch<span class="token punctuation" >]</span><span class="token punctuation" >;</span> p<span class="token operator" >=</span>pre<span class="token punctuation" >[</span>p<span class="token punctuation" >]</span><span class="token punctuation" >)</span> son<span class="token punctuation" >[</span>p<span class="token punctuation" >]</span><span class="token punctuation" >[</span>ch<span class="token punctuation" >]</span><span class="token operator" >=</span>np<span class="token punctuation" >;</span>
+        <span class="token keyword" >if</span> <span class="token punctuation" >(</span><span class="token operator" >!</span>p<span class="token punctuation" >)</span> pre<span class="token punctuation" >[</span>np<span class="token punctuation" >]</span><span class="token operator" >=</span><span class="token number" >1</span><span class="token punctuation" >;</span>
+        <span class="token keyword" >else</span>
+        <span class="token punctuation" >{</span>
+            <span class="token keyword" >int</span> q<span class="token operator" >=</span>son<span class="token punctuation" >[</span>p<span class="token punctuation" >]</span><span class="token punctuation" >[</span>ch<span class="token punctuation" >]</span><span class="token punctuation" >;</span>
+            <span class="token keyword" >if</span> <span class="token punctuation" >(</span>step<span class="token punctuation" >[</span>q<span class="token punctuation" >]</span><span class="token operator" >!=</span>step<span class="token punctuation" >[</span>p<span class="token punctuation" >]</span><span class="token operator" >+</span><span class="token number" >1</span><span class="token punctuation" >)</span>
+            <span class="token punctuation" >{</span>
+                <span class="token function" >push_back</span><span class="token punctuation" >(</span>step<span class="token punctuation" >[</span>p<span class="token punctuation" >]</span><span class="token operator" >+</span><span class="token number" >1</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+                <span class="token keyword" >int</span> nq<span class="token operator" >=</span>total<span class="token punctuation" >;</span>
+                <span class="token function" >memcpy</span><span class="token punctuation" >(</span>son<span class="token punctuation" >[</span>nq<span class="token punctuation" >]</span><span class="token punctuation" >,</span>son<span class="token punctuation" >[</span>q<span class="token punctuation" >]</span><span class="token punctuation" >,</span><span class="token keyword" >sizeof</span><span class="token punctuation" >(</span>son<span class="token punctuation" >[</span>q<span class="token punctuation" >]</span><span class="token punctuation" >)</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+                pre<span class="token punctuation" >[</span>nq<span class="token punctuation" >]</span><span class="token operator" >=</span>pre<span class="token punctuation" >[</span>q<span class="token punctuation" >]</span><span class="token punctuation" >;</span>
+                pre<span class="token punctuation" >[</span>q<span class="token punctuation" >]</span><span class="token operator" >=</span>pre<span class="token punctuation" >[</span>np<span class="token punctuation" >]</span><span class="token operator" >=</span>nq<span class="token punctuation" >;</span>
+                <span class="token keyword" >for</span> <span class="token punctuation" >(</span><span class="token punctuation" >;</span> son<span class="token punctuation" >[</span>p<span class="token punctuation" >]</span><span class="token punctuation" >[</span>ch<span class="token punctuation" >]</span><span class="token operator" >==</span>q<span class="token punctuation" >;</span> p<span class="token operator" >=</span>pre<span class="token punctuation" >[</span>p<span class="token punctuation" >]</span><span class="token punctuation" >)</span> son<span class="token punctuation" >[</span>p<span class="token punctuation" >]</span><span class="token punctuation" >[</span>ch<span class="token punctuation" >]</span><span class="token operator" >=</span>nq<span class="token punctuation" >;</span>
+            <span class="token punctuation" >}</span>  <span class="token keyword" >else</span> pre<span class="token punctuation" >[</span>np<span class="token punctuation" >]</span><span class="token operator" >=</span>q<span class="token punctuation" >;</span>
+        <span class="token punctuation" >}</span>
+        last<span class="token operator" >=</span>np<span class="token punctuation" >;</span>
+    <span class="token punctuation" >}</span>
+    <span class="token keyword" >void</span> <span class="token function" >Build</span><span class="token punctuation" >(</span><span class="token punctuation" >)</span>
+    <span class="token punctuation" >{</span>
+        cin<span class="token operator" >>></span>s<span class="token punctuation" >;</span>
+        total<span class="token operator" >=</span>last<span class="token operator" >=</span><span class="token number" >1</span><span class="token punctuation" >;</span>
+        <span class="token function" >memset</span><span class="token punctuation" >(</span>son<span class="token punctuation" >,</span><span class="token number" >0</span><span class="token punctuation" >,</span><span class="token keyword" >sizeof</span><span class="token punctuation" >(</span>son<span class="token punctuation" >)</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+        <span class="token function" >memset</span><span class="token punctuation" >(</span>pre<span class="token punctuation" >,</span><span class="token number" >0</span><span class="token punctuation" >,</span><span class="token keyword" >sizeof</span><span class="token punctuation" >(</span>pre<span class="token punctuation" >)</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+        <span class="token function" >memset</span><span class="token punctuation" >(</span>step<span class="token punctuation" >,</span><span class="token number" >0</span><span class="token punctuation" >,</span><span class="token keyword" >sizeof</span><span class="token punctuation" >(</span>step<span class="token punctuation" >)</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+        <span class="token keyword" >for</span> <span class="token punctuation" >(</span><span class="token keyword" >int</span> i<span class="token operator" >=</span><span class="token number" >0</span><span class="token punctuation" >,</span>End<span class="token operator" >=</span>s<span class="token punctuation" >.</span><span class="token function" >size</span><span class="token punctuation" >(</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span> i<span class="token operator" >!=</span>End<span class="token punctuation" >;</span> i<span class="token operator" >++</span><span class="token punctuation" >)</span> <span class="token function" >Extend</span><span class="token punctuation" >(</span>s<span class="token punctuation" >[</span>i<span class="token punctuation" >]</span><span class="token operator" >-</span><span class="token string" >'A'</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+        <span class="token function" >visit</span><span class="token punctuation" >(</span><span class="token number" >1</span><span class="token punctuation" >,</span><span class="token number" >0</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+    <span class="token punctuation" >}</span>
+<span class="token punctuation" >}</span> suf<span class="token punctuation" >;</span>
+</code></pre>
 <p>我想具体的Kyle会讲的==。</p>
 <p>这就是后缀自动机。</p>
 <p>参考文献( 有图哦(:з」∠) )：<br><a href="http://blog.sina.com.cn/s/blog_70811e1a01014dkz.html" target="_blank" rel="external">后缀自动机学习总结-functioner</a><br><a href="http://www.cnblogs.com/oyking/archive/2013/08/02/3232872.html" target="_blank" rel="external">后缀自动机讲解-Oyking</a></p>
@@ -303,7 +344,7 @@
 </blockquote>
 <p>转载自<a href="http://blog.csdn.net/huyuncong/article/details/7583214" target="_blank" rel="external">【字符串新武器】后缀自动机-huyuncong</a></p>
 <p>习题：<br><a href="http://blog.csdn.net/cyendra/article/details/37993603" target="_blank" rel="external">后缀自动机（SAM）学习指南-电子幼体</a><br><a href="http://www.cnblogs.com/Rivendell/p/5154023.html" target="_blank" rel="external">SAM 后缀自动机-Rivendell</a></p>
-
+<link href="/css/prism-tomorrow.css" rel="stylesheet">
       
     </div>
 
@@ -334,7 +375,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/03/物理竞赛随想/" rel="next" title="物理竞赛随想">
+              <a href="/2016/物理竞赛随想/" rel="next" title="物理竞赛随想">
                 <i class="fa fa-chevron-left"></i> 物理竞赛随想
               </a>
             
@@ -342,7 +383,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/09/14/滑铁卢车站/" rel="prev" title="滑铁卢车站">
+              <a href="/2016/滑铁卢车站/" rel="prev" title="滑铁卢车站">
                 滑铁卢车站 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -412,7 +453,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -422,7 +463,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

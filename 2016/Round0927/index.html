@@ -1,0 +1,678 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="COI," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="T1 IOI 2009 小熊没有在实现中注意题目里的条件（蜂蜜不能经过喜欢吃蜜蜂的小熊的家）。
+T2 IOI 2010 生活品质这就比较尴尬了：没想到怎么写=。=这个 DZY Love Sorting里用过的套路没想起来非常尴尬。简单地说就是用01序列代替复杂的排列简化判定条件。具体二分的时候感觉到是在二分一个可行范围。
+T3 IOI 2009 旅行商常规线段树优化dp。不过还是切分提示的好。bb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Round 0927小结">
+<meta property="og:url" content="http://shinfeb.github.io/2016/Round0927/index.html">
+<meta property="og:site_name" content="ShinFeb's Archieve">
+<meta property="og:description" content="T1 IOI 2009 小熊没有在实现中注意题目里的条件（蜂蜜不能经过喜欢吃蜜蜂的小熊的家）。
+T2 IOI 2010 生活品质这就比较尴尬了：没想到怎么写=。=这个 DZY Love Sorting里用过的套路没想起来非常尴尬。简单地说就是用01序列代替复杂的排列简化判定条件。具体二分的时候感觉到是在二分一个可行范围。
+T3 IOI 2009 旅行商常规线段树优化dp。不过还是切分提示的好。bb">
+<meta property="og:updated_time" content="2016-09-29T15:58:32.951Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Round 0927小结">
+<meta name="twitter:description" content="T1 IOI 2009 小熊没有在实现中注意题目里的条件（蜂蜜不能经过喜欢吃蜜蜂的小熊的家）。
+T2 IOI 2010 生活品质这就比较尴尬了：没想到怎么写=。=这个 DZY Love Sorting里用过的套路没想起来非常尴尬。简单地说就是用01序列代替复杂的排列简化判定条件。具体二分的时候感觉到是在二分一个可行范围。
+T3 IOI 2009 旅行商常规线段树优化dp。不过还是切分提示的好。bb">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://shinfeb.github.io/2016/Round0927/"/>
+
+  <title> Round 0927小结 | ShinFeb's Archieve </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">ShinFeb's Archieve</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">事了拂衣去，深藏功与名</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Round 0927小结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-09-27T00:00:00+08:00" content="2016-09-27">
+              2016-09-27
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>T1 IOI 2009 小熊</strong><br>没有在实现中注意题目里的条件（<strong>蜂蜜</strong>不能经过喜欢吃蜜蜂的小熊的家）。</p>
+<p><strong>T2 IOI 2010 生活品质</strong><br>这就比较尴尬了：没想到怎么写=。=<br>这个 <strong>DZY Love Sorting</strong>里用过的套路没想起来非常尴尬。<br>简单地说就是用01序列代替复杂的排列简化判定条件。<br>具体二分的时候感觉到是在二分一个可行范围。</p>
+<p><strong>T3 IOI 2009 旅行商</strong><br>常规线段树优化dp。<br>不过还是切分提示的好。<br>bblss123神犇可以用spfa虐<del>个15分</del>。</p>
+<p>FastInput by <strong>bblss123</strong></p>
+<pre class="language-cpp"><code class="language-cpp"><span class="token keyword" >char</span> buf<span class="token punctuation" >[</span>M<span class="token operator" >*</span><span class="token number" >8</span><span class="token punctuation" >]</span><span class="token punctuation" >,</span><span class="token operator" >*</span>p<span class="token punctuation" >;</span>
+<span class="token keyword" >inline</span> <span class="token keyword" >void</span> <span class="token function" >rd</span><span class="token punctuation" >(</span><span class="token keyword" >int</span> <span class="token operator" >&amp;</span>a<span class="token punctuation" >)</span><span class="token punctuation" >{</span>
+    <span class="token keyword" >for</span><span class="token punctuation" >(</span><span class="token operator" >++</span>p<span class="token punctuation" >;</span><span class="token operator" >*</span>p<span class="token operator" >&lt;=</span><span class="token number" >32</span><span class="token punctuation" >;</span><span class="token operator" >++</span>p<span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+    <span class="token keyword" >for</span><span class="token punctuation" >(</span>a<span class="token operator" >=</span><span class="token number" >0</span><span class="token punctuation" >;</span><span class="token number" >47</span><span class="token operator" >&lt;</span><span class="token operator" >*</span>p<span class="token punctuation" >;</span><span class="token operator" >++</span>p<span class="token punctuation" >)</span>a<span class="token operator" >=</span>a<span class="token operator" >*</span><span class="token number" >10</span><span class="token operator" >+</span><span class="token punctuation" >(</span><span class="token operator" >*</span>p<span class="token operator" >^</span><span class="token number" >48</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+<span class="token punctuation" >}</span>
+<span class="token keyword" >int</span> <span class="token function" >main</span><span class="token punctuation" >(</span><span class="token punctuation" >)</span><span class="token punctuation" >{</span>
+    p<span class="token operator" >=</span>buf<span class="token number" >-1</span><span class="token punctuation" >;</span>
+    <span class="token function" >fread</span><span class="token punctuation" >(</span>buf<span class="token punctuation" >,</span><span class="token number" >1</span><span class="token punctuation" >,</span>M<span class="token operator" >*</span>M<span class="token operator" >*</span><span class="token number" >8</span><span class="token punctuation" >,</span><span class="token constant" >stdin</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+      <span class="token punctuation" >.</span><span class="token punctuation" >.</span><span class="token punctuation" >.</span><span class="token punctuation" >.</span>
+<span class="token punctuation" >}</span>
+</code></pre>
+<p><strong>Templet</strong> by ShinFeb</p>
+<pre class="language-cpp"><code class="language-cpp"><span class="token macro property" >#<span class="token directive keyword" >include</span> <span class="token string" >&lt;cstdio></span></span>
+<span class="token macro property" >#<span class="token directive keyword" >include</span> <span class="token string" >&lt;cstring></span></span>
+<span class="token macro property" >#<span class="token directive keyword" >include</span> <span class="token string" >&lt;algorithm></span></span>
+<span class="token macro property" >#<span class="token directive keyword" >include</span> <span class="token string" >&lt;iostream></span></span>
+<span class="token macro property" >#<span class="token directive keyword" >include</span> <span class="token string" >&lt;cmath></span></span>
+<span class="token macro property" >#<span class="token directive keyword" >include</span> <span class="token string" >&lt;cctype></span></span>
+<span class="token macro property" >#<span class="token directive keyword" >include</span> <span class="token string" >&lt;cassert></span></span>
+<span class="token macro property" >#<span class="token directive keyword" >include</span> <span class="token string" >&lt;ctime></span></span>
+<span class="token macro property" >#<span class="token directive keyword" >include</span> <span class="token string" >&lt;cstdlib></span></span>
+<span class="token macro property" >#<span class="token directive keyword" >include</span> <span class="token string" >&lt;queue></span></span>
+<span class="token macro property" >#<span class="token directive keyword" >include</span> <span class="token string" >&lt;set></span></span>
+<span class="token macro property" >#<span class="token directive keyword" >include</span> <span class="token string" >&lt;bitset></span></span>
+<span class="token macro property" >#<span class="token directive keyword" >include</span> <span class="token string" >&lt;stack></span></span>
+
+<span class="token comment" spellcheck="true">//long long,memory,freopen</span>
+<span class="token keyword" >using</span> <span class="token keyword" >namespace</span> std<span class="token punctuation" >;</span>
+
+<span class="token macro property" >#<span class="token directive keyword" >define</span> rep(i,s,t) for(register int i=s,t_=t;i&lt;t_;i++)</span>
+<span class="token macro property" >#<span class="token directive keyword" >define</span> per(i,s,t) for(register int i=(t)-1,s_=s;i>=s_;i--)</span>
+<span class="token macro property" >#<span class="token directive keyword" >define</span> prt(x) cout&lt;&lt;#x&lt;&lt;":"&lt;&lt;x&lt;&lt;" "</span>
+<span class="token macro property" >#<span class="token directive keyword" >define</span> prtn(x) cout&lt;&lt;#x&lt;&lt;":"&lt;&lt;x&lt;&lt;endl</span>
+<span class="token macro property" >#<span class="token directive keyword" >define</span> shut assert(0)</span>
+<span class="token macro property" >#<span class="token directive keyword" >define</span> when printf("%.2f\n",1.0*clock()/CLOCKS_PER_SEC)</span>
+<span class="token macro property" >#<span class="token directive keyword" >define</span> sqr(x) ((x)*(x))</span>
+<span class="token macro property" >#<span class="token directive keyword" >define</span> inf (1&lt;&lt;30)</span>
+<span class="token macro property" >#<span class="token directive keyword" >define</span> INF (1ll&lt;&lt;62)</span>
+
+<span class="token keyword" >typedef</span> <span class="token keyword" >long</span> <span class="token keyword" >long</span> ll<span class="token punctuation" >;</span>
+<span class="token keyword" >typedef</span> <span class="token keyword" >double</span> db<span class="token punctuation" >;</span>
+<span class="token keyword" >struct</span> ii
+<span class="token punctuation" >{</span>
+    <span class="token keyword" >int</span> x<span class="token punctuation" >,</span>y<span class="token punctuation" >;</span>
+    <span class="token function" >ii</span><span class="token punctuation" >(</span><span class="token keyword" >int</span> x<span class="token operator" >=</span><span class="token number" >0</span><span class="token punctuation" >,</span><span class="token keyword" >int</span> y<span class="token operator" >=</span><span class="token number" >0</span><span class="token punctuation" >)</span><span class="token operator" >:</span><span class="token function" >x</span><span class="token punctuation" >(</span>x<span class="token punctuation" >)</span><span class="token punctuation" >,</span><span class="token function" >y</span><span class="token punctuation" >(</span>y<span class="token punctuation" >)</span><span class="token punctuation" >{</span><span class="token punctuation" >}</span>
+    <span class="token keyword" >inline</span> <span class="token keyword" >bool</span> <span class="token keyword" >operator</span><span class="token operator" >&lt;</span><span class="token punctuation" >(</span><span class="token keyword" >const</span> ii <span class="token operator" >&amp;</span>a<span class="token punctuation" >)</span><span class="token keyword" >const</span><span class="token punctuation" >{</span><span class="token keyword" >return</span> <span class="token punctuation" >(</span>x<span class="token operator" >==</span>a<span class="token punctuation" >.</span>x<span class="token operator" >&amp;&amp;</span>y<span class="token operator" >&lt;</span>a<span class="token punctuation" >.</span>y<span class="token punctuation" >)</span><span class="token operator" >||</span>x<span class="token operator" >&lt;</span>a<span class="token punctuation" >.</span>x<span class="token punctuation" >;</span><span class="token punctuation" >}</span>
+    ii <span class="token keyword" >operator</span><span class="token operator" >+</span><span class="token punctuation" >(</span><span class="token keyword" >const</span> ii <span class="token operator" >&amp;</span>a<span class="token punctuation" >)</span><span class="token keyword" >const</span><span class="token punctuation" >{</span><span class="token keyword" >return</span> <span class="token function" >ii</span><span class="token punctuation" >(</span>x<span class="token operator" >+</span>a<span class="token punctuation" >.</span>x<span class="token punctuation" >,</span>y<span class="token operator" >+</span>a<span class="token punctuation" >.</span>y<span class="token punctuation" >)</span><span class="token punctuation" >;</span><span class="token punctuation" >}</span>
+<span class="token punctuation" >}</span><span class="token punctuation" >;</span>
+
+<span class="token keyword" >template</span><span class="token operator" >&lt;</span><span class="token keyword" >class</span> <span class="token class-name" >v</span><span class="token operator" >></span><span class="token keyword" >void</span> <span class="token function" >sc</span><span class="token punctuation" >(</span>v <span class="token operator" >&amp;</span>x<span class="token punctuation" >)</span>
+<span class="token punctuation" >{</span>
+    <span class="token keyword" >char</span> c<span class="token punctuation" >;</span>x<span class="token operator" >=</span><span class="token number" >0</span><span class="token punctuation" >;</span><span class="token keyword" >int</span> f<span class="token operator" >=</span><span class="token number" >1</span><span class="token punctuation" >;</span>
+    <span class="token keyword" >while</span><span class="token punctuation" >(</span>c<span class="token operator" >=</span><span class="token function" >getchar</span><span class="token punctuation" >(</span><span class="token punctuation" >)</span><span class="token punctuation" >,</span>c<span class="token operator" >&lt;</span><span class="token number" >48</span><span class="token punctuation" >)</span><span class="token keyword" >if</span><span class="token punctuation" >(</span>c<span class="token operator" >==</span><span class="token string" >'-'</span><span class="token punctuation" >)</span>f<span class="token operator" >=</span><span class="token operator" >-</span><span class="token number" >1</span><span class="token punctuation" >;</span>
+    <span class="token keyword" >do</span> x<span class="token operator" >=</span>x<span class="token operator" >*</span><span class="token number" >10</span><span class="token operator" >+</span><span class="token punctuation" >(</span>c<span class="token operator" >^</span><span class="token number" >48</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+    <span class="token keyword" >while</span><span class="token punctuation" >(</span>c<span class="token operator" >=</span><span class="token function" >getchar</span><span class="token punctuation" >(</span><span class="token punctuation" >)</span><span class="token punctuation" >,</span>c<span class="token operator" >></span><span class="token number" >47</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+    x<span class="token operator" >*</span><span class="token operator" >=</span>f<span class="token punctuation" >;</span>
+<span class="token punctuation" >}</span>
+<span class="token keyword" >template</span><span class="token operator" >&lt;</span><span class="token keyword" >class</span> <span class="token class-name" >v</span><span class="token operator" >></span><span class="token keyword" >void</span> <span class="token function" >nt</span><span class="token punctuation" >(</span>v x<span class="token punctuation" >)</span>
+<span class="token punctuation" >{</span>
+    <span class="token keyword" >if</span><span class="token punctuation" >(</span><span class="token operator" >!</span>x<span class="token punctuation" >)</span><span class="token keyword" >return</span><span class="token punctuation" >;</span>
+    <span class="token function" >nt</span><span class="token punctuation" >(</span>x<span class="token operator" >/</span><span class="token number" >10</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span><span class="token function" >putchar</span><span class="token punctuation" >(</span><span class="token string" >'0'</span><span class="token operator" >+</span>x<span class="token operator" >%</span><span class="token number" >10</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+<span class="token punctuation" >}</span>
+<span class="token keyword" >template</span><span class="token operator" >&lt;</span><span class="token keyword" >class</span> <span class="token class-name" >v</span><span class="token operator" >></span><span class="token keyword" >void</span> <span class="token function" >pt</span><span class="token punctuation" >(</span>v x<span class="token punctuation" >)</span>
+<span class="token punctuation" >{</span>
+    <span class="token keyword" >if</span><span class="token punctuation" >(</span>x<span class="token operator" >&lt;</span><span class="token number" >0</span><span class="token punctuation" >)</span><span class="token function" >putchar</span><span class="token punctuation" >(</span><span class="token string" >'-'</span><span class="token punctuation" >)</span><span class="token punctuation" >,</span>x<span class="token operator" >=</span><span class="token operator" >-</span>x<span class="token punctuation" >;</span>
+    <span class="token keyword" >if</span><span class="token punctuation" >(</span><span class="token operator" >!</span>x<span class="token punctuation" >)</span><span class="token function" >putchar</span><span class="token punctuation" >(</span><span class="token string" >'0'</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+    <span class="token keyword" >else</span> <span class="token function" >nt</span><span class="token punctuation" >(</span>x<span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+<span class="token punctuation" >}</span>
+<span class="token keyword" >template</span><span class="token operator" >&lt;</span><span class="token keyword" >class</span> <span class="token class-name" >v</span><span class="token operator" >></span><span class="token keyword" >void</span> <span class="token function" >ptn</span><span class="token punctuation" >(</span>v x<span class="token punctuation" >)</span>
+<span class="token punctuation" >{</span>
+    <span class="token function" >pt</span><span class="token punctuation" >(</span>x<span class="token punctuation" >)</span><span class="token punctuation" >;</span><span class="token function" >putchar</span><span class="token punctuation" >(</span><span class="token string" >'\n'</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+<span class="token punctuation" >}</span>
+<span class="token keyword" >template</span><span class="token operator" >&lt;</span><span class="token keyword" >class</span> <span class="token class-name" >v</span><span class="token operator" >></span><span class="token keyword" >void</span> <span class="token function" >pts</span><span class="token punctuation" >(</span>v x<span class="token punctuation" >)</span>
+<span class="token punctuation" >{</span>
+    <span class="token function" >pt</span><span class="token punctuation" >(</span>x<span class="token punctuation" >)</span><span class="token punctuation" >;</span><span class="token function" >putchar</span><span class="token punctuation" >(</span><span class="token string" >' '</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+<span class="token punctuation" >}</span>
+<span class="token keyword" >template</span><span class="token operator" >&lt;</span><span class="token keyword" >class</span> <span class="token class-name" >v</span><span class="token operator" >></span><span class="token keyword" >void</span> <span class="token function" >pp</span><span class="token punctuation" >(</span>v x<span class="token punctuation" >,</span><span class="token keyword" >int</span> f<span class="token punctuation" >)</span>
+<span class="token punctuation" >{</span>
+    <span class="token keyword" >static</span> <span class="token keyword" >char</span> ch<span class="token punctuation" >[</span><span class="token punctuation" >]</span><span class="token operator" >=</span><span class="token punctuation" >{</span><span class="token string" >" \n    "</span><span class="token punctuation" >}</span><span class="token punctuation" >;</span>
+    <span class="token function" >pt</span><span class="token punctuation" >(</span>x<span class="token punctuation" >)</span><span class="token punctuation" >;</span><span class="token function" >putchar</span><span class="token punctuation" >(</span>ch<span class="token punctuation" >[</span>f<span class="token punctuation" >]</span><span class="token punctuation" >)</span><span class="token punctuation" >;</span>
+<span class="token punctuation" >}</span>
+<span class="token keyword" >template</span><span class="token operator" >&lt;</span><span class="token keyword" >class</span> <span class="token class-name" >v</span><span class="token operator" >></span><span class="token keyword" >inline</span> <span class="token keyword" >void</span> <span class="token function" >Max</span><span class="token punctuation" >(</span>v <span class="token operator" >&amp;</span>x<span class="token punctuation" >,</span>v y<span class="token punctuation" >)</span><span class="token punctuation" >{</span><span class="token keyword" >if</span><span class="token punctuation" >(</span>x<span class="token operator" >&lt;</span>y<span class="token punctuation" >)</span>x<span class="token operator" >=</span>y<span class="token punctuation" >;</span><span class="token punctuation" >}</span>
+<span class="token keyword" >template</span><span class="token operator" >&lt;</span><span class="token keyword" >class</span> <span class="token class-name" >v</span><span class="token operator" >></span><span class="token keyword" >inline</span> <span class="token keyword" >void</span> <span class="token function" >Min</span><span class="token punctuation" >(</span>v <span class="token operator" >&amp;</span>x<span class="token punctuation" >,</span>v y<span class="token punctuation" >)</span><span class="token punctuation" >{</span><span class="token keyword" >if</span><span class="token punctuation" >(</span>x<span class="token operator" >></span>y<span class="token punctuation" >)</span>x<span class="token operator" >=</span>y<span class="token punctuation" >;</span><span class="token punctuation" >}</span>
+<span class="token keyword" >int</span> <span class="token function" >main</span><span class="token punctuation" >(</span><span class="token punctuation" >)</span>
+<span class="token punctuation" >{</span>
+<span class="token comment" spellcheck="true">//    freopen("pro.in","r",stdin);</span>
+<span class="token comment" spellcheck="true">//    freopen("chk.out","w",stdout);</span>
+    <span class="token keyword" >return</span> <span class="token number" >0</span><span class="token punctuation" >;</span>
+<span class="token punctuation" >}</span>
+</code></pre>
+<link href="/css/prism-tomorrow.css" rel="stylesheet">
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/COI/" rel="tag">#COI</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/滑铁卢车站/" rel="next" title="滑铁卢车站">
+                <i class="fa fa-chevron-left"></i> 滑铁卢车站
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2100/BGM/" rel="prev" title="Time again, eyes still.">
+                Time again, eyes still. <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="ShinFeb" />
+          <p class="site-author-name" itemprop="name">ShinFeb</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ShinFeb</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
